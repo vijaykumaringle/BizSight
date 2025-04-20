@@ -18,7 +18,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Icons } from "@/components/icons"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -495,8 +494,7 @@ const SidebarMenu = React.forwardRef<
     data-sidebar="menu"
     className={cn("flex w-full min-w-0 flex-col gap-1", className)}
     {...props}
-  >
-  </ul>
+  />
 ))
 SidebarMenu.displayName = "SidebarMenu"
 
@@ -763,7 +761,8 @@ export {
   SidebarTrigger,
   useSidebar,
 }
-import { SidebarMenu } from "./ui/sidebar"
+
+import { Icons } from "./icons"
 
 interface MainNavItem {
   title: string
@@ -783,9 +782,9 @@ export function MainNav({ className, items }: MainNavProps) {
     { href: "/income", icon: "income", title: "Income" },
     { href: "/expenses", icon: "expense", title: "Expenses" },
     { href: "/tax-insights", icon: "taxInsights", title: "Tax Insights" },
-  ]
+  ];
   return (
-    <SidebarMenu>
+    <SidebarMenu className={className}>
       {mainItems.map((item) => (
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton href={item.href} asChild>
@@ -797,6 +796,6 @@ export function MainNav({ className, items }: MainNavProps) {
         </SidebarMenuItem>
       ))}
     </SidebarMenu>
-  )
+  );
 }
 
