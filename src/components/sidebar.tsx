@@ -806,18 +806,17 @@ export function MainNav({className, items}: MainNavProps) {
   ];
   return (
     <SidebarMenu className={className}>
-      <ul>
-        {mainItems.map((item) => (
-          <SidebarMenuItem key={item.href}>
-            <SidebarMenuButton href={item.href} asChild>
-              <a className="flex items-center gap-2">
-                <Icons[item.icon] className="h-4 w-4" />
-                <span>{item.title}</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        ))}
-      </ul>
+      {mainItems.map((item) => (
+        <SidebarMenuItem key={item.href}>
+          <SidebarMenuButton href={item.href} asChild>
+            <a className="flex items-center gap-2">
+              <Icons[item.icon] className="h-4 w-4" />
+              <span>{item.title}</span>
+            </a>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      ))}
     </SidebarMenu>
   );
 }
+
