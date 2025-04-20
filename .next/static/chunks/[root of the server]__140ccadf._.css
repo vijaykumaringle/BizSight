@@ -837,6 +837,10 @@ body {
   width: 100%;
 }
 
+.w-8 {
+  width: 2rem;
+}
+
 .min-w-0 {
   min-width: 0;
 }
