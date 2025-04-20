@@ -3,7 +3,7 @@
 import React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
-import { PanelLeft } from "lucide-react"
+import { PanelLeft, X } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -19,7 +19,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-import { SidebarMenu } from "./sidebar";
+import { Icons } from "./icons"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -765,8 +765,6 @@ export {
 }
 
 
-import { Icons } from "./icons"
-
 interface MainNavItem {
   title: string
   href: string
@@ -778,7 +776,7 @@ interface MainNavProps {
   items?: MainNavItem[]
 }
 
-export function MainNav({ className, items }: MainNavProps) {
+function MainNav({ className, items }: MainNavProps) {
   const mainItems: MainNavItem[] = [
     { href: "/", icon: "dashboard", title: "Dashboard" },
     { href: "/calendar", icon: "calendar", title: "Calendar" },
@@ -791,7 +789,7 @@ export function MainNav({ className, items }: MainNavProps) {
       {mainItems.map((item) => (
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton href={item.href} asChild>
-            <a className={cn("flex items-center gap-2", className)}>
+            <a className={cn("flex items-center gap-2")}>
               <Icons[item.icon] className="h-4 w-4" />
               <span>{item.title}</span>
             </a>
@@ -802,3 +800,4 @@ export function MainNav({ className, items }: MainNavProps) {
   );
 }
 
+export { MainNav };
