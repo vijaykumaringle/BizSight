@@ -785,23 +785,25 @@ function MainNav({ className, items }: MainNavProps) {
     { href: "/tax-insights", icon: "taxInsights", title: "Tax Insights" },
   ];
   return (
-    
+    <SidebarMenu className={className}>
       {mainItems.map((item) => (
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton href={item.href} asChild>
-            <a className={cn("flex items-center gap-2", className)}>
+            <a className={cn("flex items-center gap-2")}>
               <Icons[item.icon] className="h-4 w-4" />
               <span>{item.title}</span>
             </a>
           </SidebarMenuButton>
         </SidebarMenuItem>
       ))}
-    
+    </SidebarMenu>
   );
 }
 
 export { MainNav };
     
 
+
+    
 
     
