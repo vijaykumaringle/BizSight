@@ -1,6 +1,6 @@
 "use client"
 
-import { SidebarMenu } from "./ui/sidebar"
+
 
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
@@ -20,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { SidebarMenu } from "./ui/sidebar"
 import { Icons } from "@/components/icons"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
