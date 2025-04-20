@@ -462,7 +462,7 @@ const SidebarGroupAction = React.forwardRef<
       ref={ref}
       data-sidebar="group-action"
       className={cn(
-        "absolute right-3 top-3.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground outline-none ring-sidebar-ring transition-transform hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "absolute right-3 top-3.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground outline-none ring-sidebar-ring transition-transform hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 peer-hover/menu-button:text-sidebar-accent-foreground [&>svg]:size-4 [&>svg]:shrink-0",
         // Increases the hit area of the button on mobile.
         "after:absolute after:-inset-2 after:md:hidden",
         "group-data-[collapsible=icon]:hidden",
@@ -790,6 +790,7 @@ function MainNav({ className, items }: MainNavProps) {
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton href={item.href} asChild>
             <a className={cn("flex items-center gap-2")}>
+              {/* Accessing the Icon component using bracket notation */}
               <Icons[item.icon] className="h-4 w-4" />
               <span>{item.title}</span>
             </a>
@@ -801,5 +802,4 @@ function MainNav({ className, items }: MainNavProps) {
 }
 
 export { MainNav };
-
     
