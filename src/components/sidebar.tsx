@@ -295,7 +295,7 @@ const SidebarInset = React.forwardRef<
   React.ComponentProps<"main">
 >(({ className, ...props }, ref) => {
   return (
-    
+    <div className={cn("", className)} ref={ref} {...props} />
   )
 })
 SidebarInset.displayName = "SidebarInset"
@@ -305,7 +305,11 @@ const SidebarInput = React.forwardRef<
   React.ComponentProps<typeof Input>
 >(({ className, ...props }, ref) => {
   return (
-    
+    <Input
+      className={cn("", className)}
+      ref={ref}
+      {...props}
+    />
   )
 })
 SidebarInput.displayName = "SidebarInput"
@@ -313,8 +317,10 @@ SidebarInput.displayName = "SidebarInput"
 const SidebarHeader = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div">
->(({ className, ...props }, ref) => {
+>(({ className, children, ...props }, ref) => {
   return (
+    
+      {children}
     
   )
 })
@@ -325,7 +331,7 @@ const SidebarFooter = React.forwardRef<
   React.ComponentProps<"div">
 >(({ className, ...props }, ref) => {
   return (
-    
+    <div ref={ref} className={cn("", className)} {...props}/>
   )
 })
 SidebarFooter.displayName = "SidebarFooter"
@@ -645,6 +651,10 @@ export { MainNav };
     
 
     
+
+
+
+
 
 
 
