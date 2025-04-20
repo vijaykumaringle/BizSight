@@ -1,7 +1,5 @@
 "use client"
 
-
-
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
@@ -20,7 +18,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { SidebarMenu } from "./ui/sidebar"
 import { Icons } from "@/components/icons"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
@@ -766,7 +763,7 @@ export {
   SidebarTrigger,
   useSidebar,
 }
-
+import { SidebarMenu } from "./ui/sidebar"
 
 interface MainNavItem {
   title: string
