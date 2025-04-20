@@ -18,7 +18,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import {Icons} from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -763,49 +763,29 @@ export {
   SidebarTrigger,
   useSidebar,
 }
+import { SidebarMenu } from "./ui/sidebar"
 
-// src/components/main-nav.tsx
 interface MainNavItem {
-  title: string;
-  href: string;
-  icon: keyof typeof Icons;
+  title: string
+  href: string
+  icon: keyof typeof Icons
 }
 
 interface MainNavProps {
-  className?: string;
-  items?: MainNavItem[];
+  className?: string
+  items?: MainNavItem[]
 }
 
-export function MainNav({className, items}: MainNavProps) {
+export function MainNav({ className, items }: MainNavProps) {
   const mainItems: MainNavItem[] = [
-    {
-      href: "/",
-      icon: "dashboard",
-      title: "Dashboard",
-    },
-    {
-      href: "/calendar",
-      icon: "calendar",
-      title: "Calendar",
-    },
-    {
-      href: "/income",
-      icon: "income",
-      title: "Income",
-    },
-    {
-      href: "/expenses",
-      icon: "expense",
-      title: "Expenses",
-    },
-    {
-      href: "/tax-insights",
-      icon: "taxInsights",
-      title: "Tax Insights",
-    },
-  ];
+    { href: "/", icon: "dashboard", title: "Dashboard" },
+    { href: "/calendar", icon: "calendar", title: "Calendar" },
+    { href: "/income", icon: "income", title: "Income" },
+    { href: "/expenses", icon: "expense", title: "Expenses" },
+    { href: "/tax-insights", icon: "taxInsights", title: "Tax Insights" },
+  ]
   return (
-    
+    <SidebarMenu>
       {mainItems.map((item) => (
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton href={item.href} asChild>
@@ -816,7 +796,7 @@ export function MainNav({className, items}: MainNavProps) {
           </SidebarMenuButton>
         </SidebarMenuItem>
       ))}
-    
-  );
+    </SidebarMenu>
+  )
 }
 
