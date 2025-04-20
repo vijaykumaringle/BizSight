@@ -1,3 +1,6 @@
+"use client"; // Required for using hooks like usePathname
+
+import { usePathname } from 'next/navigation'; // Import usePathname
 import {DashboardHeader} from '@/components/dashboard-header';
 import {DashboardMetrics} from '@/components/dashboard-metrics';
 import {AppointmentCalendar} from '@/components/appointment-calendar';
@@ -6,11 +9,14 @@ import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 import {SidebarProvider, Sidebar, SidebarContent, MainNav} from '@/components/sidebar';
 
 export default function Home() {
+  const pathname = usePathname(); // Get the current pathname
+
   return (
     <SidebarProvider>
       <Sidebar collapsible="icon">
         <SidebarContent>
-          <MainNav />
+          {/* Pass the pathname to MainNav */}
+          <MainNav pathname={pathname} />
         </SidebarContent>
       </Sidebar>
       <div className="flex-1 p-4">

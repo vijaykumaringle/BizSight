@@ -27,8 +27,9 @@ import {
   LayoutDashboard,
   Calendar,
   Receipt,
-  CurrencyDollar,
+  Currency, // Changed from CurrencyDollar
   Lightbulb,
+  X, // Added X import
 } from 'lucide-react';
 
 const Icons = {
@@ -37,7 +38,7 @@ const Icons = {
   chevronDown: ChevronsUpDown,
   circle: Circle,
   workflow: Workflow,
-  close: X,
+  close: X, // Added close icon
   copy: Copy,
   dark: Moon,
   edit: Edit,
@@ -61,7 +62,7 @@ const Icons = {
   user: User,
   dashboard: LayoutDashboard,
   calendar: Calendar,
-  income: CurrencyDollar,
+  income: Currency, // Changed from CurrencyDollar
   expense: Receipt,
   taxInsights: Lightbulb,
 };
