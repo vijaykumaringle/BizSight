@@ -106,7 +106,7 @@ var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
 const e = new Error(`Could not parse module '[project]/src/components/sidebar.tsx'
 
-Unexpected token `SidebarMenu`. Expected jsx identifier`);
+Unexpected token `ul`. Expected jsx identifier`);
 e.code = 'MODULE_UNPARSEABLE';
 throw e;}}),
 "[project]/src/app/layout.tsx [app-rsc] (ecmascript)": ((__turbopack_context__) => {

@@ -785,7 +785,7 @@ function MainNav({ className, items }: MainNavProps) {
     { href: "/tax-insights", icon: "taxInsights", title: "Tax Insights" },
   ];
   return (
-    <SidebarMenu className={className}>
+    <ul>
       {mainItems.map((item) => (
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton href={item.href} asChild>
@@ -796,8 +796,9 @@ function MainNav({ className, items }: MainNavProps) {
           </SidebarMenuButton>
         </SidebarMenuItem>
       ))}
-    </SidebarMenu>
+    </ul>
   );
 }
 
 export { MainNav };
+
