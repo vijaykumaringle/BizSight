@@ -72,8 +72,8 @@ const taxDeductionInsightsFlow = ai.defineFlow<
   async input => {
     const {output} = await prompt(input);
     return {
-      insights: output?.insights ?? 'No insights found.',
-      disclaimer: output?.disclaimer ?? 'Consult with a tax professional for personalized advice.',
+      insights: output?.insights,
+      disclaimer: output?.disclaimer,
     };
   }
 );

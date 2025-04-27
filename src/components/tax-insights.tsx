@@ -13,6 +13,7 @@ import * as Icons from "@/components/icons"
 
 export function TaxInsights() {
   const [insights, setInsights] = useState<string | null>(null); // Initialize to null
+  const [disclaimer, setDisclaimer] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -20,6 +21,7 @@ export function TaxInsights() {
     startTransition(async () => {
       setError(null);
       setInsights(null); // Clear previous insights
+      setDisclaimer(null);
 
       try {
         // TODO: Replace with actual income and expense data
@@ -58,7 +60,12 @@ export function TaxInsights() {
         }
 
         const data = await response.json();
-        setInsights(data.output.insights);
+        if (data.output) {
+            setInsights(data.output.insights || null);
+            setDisclaimer(data.output.disclaimer || null);
+        } else {
+            setError("Failed to retrieve insights. Please try again.");
+        }
       } catch (err) {
         console.error("Error generating tax insights:", err);
         const error = err instanceof Error ? err.message : 'An unknown error occurred';
@@ -85,9 +92,14 @@ export function TaxInsights() {
           <p className="text-sm text-red-600">Error: {error}</p>
         )}
         {insights && !isPending && (
-          <div className="prose prose-sm max-w-none">
-            {/* Render insights - adjust formatting as needed */}
-            <pre className="whitespace-pre-wrap text-sm">{insights}</pre>
+          <div className="space-y-2">
+            <div className="prose prose-sm max-w-none">
+              {/* Render insights - adjust formatting as needed */}
+              <pre className="whitespace-pre-wrap text-sm">{insights}</pre>
+            </div>
+            {disclaimer && (
+              <p className="text-sm italic">{disclaimer}</p>
+            )}
           </div>
         )}
       </CardContent>
