@@ -466,11 +466,10 @@ function TaxInsights({ income, expenses, currency, expenseBreakdown, incomeBreak
                     // Check content type before assuming JSON
                     const contentType = response.headers.get('content-type');
                     let errorMessage = `HTTP error! status: ${response.status}`;
-                    if (contentType && contentType.includes('application/json')) {
+                    try {
                         const errorData = await response.json();
                         errorMessage = errorData.error || errorMessage;
-                    } else {
-                        // If not JSON, read as text to get potentially helpful server error messages
+                    } catch (jsonError) {
                         const errorText = await response.text();
                         errorMessage = `${errorMessage}: ${errorText}`;
                         console.error("Raw error response from server:", errorText);
@@ -499,20 +498,20 @@ function TaxInsights({ income, expenses, currency, expenseBreakdown, incomeBreak
                         children: "Tax Deduction Insights"
                     }, void 0, false, {
                         fileName: "[project]/src/components/tax-insights.tsx",
-                        lineNumber: 114,
+                        lineNumber: 113,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                         children: "Generate AI-powered insights based on your income and expenses."
                     }, void 0, false, {
                         fileName: "[project]/src/components/tax-insights.tsx",
-                        lineNumber: 115,
+                        lineNumber: 114,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/tax-insights.tsx",
-                lineNumber: 113,
+                lineNumber: 112,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -525,27 +524,27 @@ function TaxInsights({ income, expenses, currency, expenseBreakdown, incomeBreak
                                 className: "h-4 w-[250px]"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/tax-insights.tsx",
-                                lineNumber: 120,
+                                lineNumber: 119,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$skeleton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Skeleton"], {
                                 className: "h-4 w-[200px]"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/tax-insights.tsx",
-                                lineNumber: 121,
+                                lineNumber: 120,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$skeleton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Skeleton"], {
                                 className: "h-4 w-[220px]"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/tax-insights.tsx",
-                                lineNumber: 122,
+                                lineNumber: 121,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/tax-insights.tsx",
-                        lineNumber: 119,
+                        lineNumber: 118,
                         columnNumber: 13
                     }, this),
                     error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -556,7 +555,7 @@ function TaxInsights({ income, expenses, currency, expenseBreakdown, incomeBreak
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/tax-insights.tsx",
-                        lineNumber: 126,
+                        lineNumber: 125,
                         columnNumber: 11
                     }, this),
                     insights && !isPending && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -567,7 +566,7 @@ function TaxInsights({ income, expenses, currency, expenseBreakdown, incomeBreak
                                 children: insights.replace(/\$(\d[\d,]*)/g, (match, number)=>"₹" + Number(number.replace(/,/g, '')).toLocaleString('en-IN'))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/tax-insights.tsx",
-                                lineNumber: 130,
+                                lineNumber: 129,
                                 columnNumber: 17
                             }, this),
                             disclaimer && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -575,19 +574,19 @@ function TaxInsights({ income, expenses, currency, expenseBreakdown, incomeBreak
                                 children: disclaimer
                             }, void 0, false, {
                                 fileName: "[project]/src/components/tax-insights.tsx",
-                                lineNumber: 133,
+                                lineNumber: 132,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/tax-insights.tsx",
-                        lineNumber: 129,
+                        lineNumber: 128,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/tax-insights.tsx",
-                lineNumber: 117,
+                lineNumber: 116,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardFooter"], {
@@ -597,18 +596,18 @@ function TaxInsights({ income, expenses, currency, expenseBreakdown, incomeBreak
                     children: isPending ? 'Generating...' : 'Generate Tax Insights'
                 }, void 0, false, {
                     fileName: "[project]/src/components/tax-insights.tsx",
-                    lineNumber: 139,
+                    lineNumber: 138,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/tax-insights.tsx",
-                lineNumber: 138,
+                lineNumber: 137,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/tax-insights.tsx",
-        lineNumber: 112,
+        lineNumber: 111,
         columnNumber: 5
     }, this);
 }

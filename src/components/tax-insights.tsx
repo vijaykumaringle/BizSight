@@ -80,13 +80,12 @@ export function TaxInsights({ income, expenses, currency, expenseBreakdown, inco
           // Check content type before assuming JSON
           const contentType = response.headers.get('content-type');
           let errorMessage = `HTTP error! status: ${response.status}`;
-          if (contentType && contentType.includes('application/json')) {
+           try {
             const errorData = await response.json();
             errorMessage = errorData.error || errorMessage;
-          } else {
-            // If not JSON, read as text to get potentially helpful server error messages
-            const errorText = await response.text();
-            errorMessage = `${errorMessage}: ${errorText}`;
+          } catch (jsonError) {
+             const errorText = await response.text();
+             errorMessage = `${errorMessage}: ${errorText}`;
             console.error("Raw error response from server:", errorText)
           }
           throw new Error(errorMessage);

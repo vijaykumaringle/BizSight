@@ -144,7 +144,7 @@ const SidebarProvider = React.forwardRef<
       </SidebarContext.Provider>
     );
   }
-)
+);
 SidebarProvider.displayName = 'SidebarProvider';
 
 const Sidebar = React.forwardRef<
@@ -202,7 +202,6 @@ const Sidebar = React.forwardRef<
     }
 
     return (
-      <>
         <div
           data-sidebar="sidebar"
           data-state={state}
@@ -221,19 +220,9 @@ const Sidebar = React.forwardRef<
         >
           {children}
         </div>
-        {/* This div pushes the main content to the right */}
-        <div
-          className={cn(
-            'transition-[margin-left]',
-            state === 'expanded'
-              ? 'ml-[var(--sidebar-width)]'
-              : 'ml-[var(--sidebar-width-icon)]'
-          )}
-        />
-      </>
     );
   }
-)
+);
 Sidebar.displayName = 'Sidebar';
 
 const SidebarTrigger = React.forwardRef<
@@ -315,9 +304,9 @@ const SidebarInput = React.forwardRef<
   React.ComponentProps<typeof Input>
 >(({className, ...props}, ref) => {
   return (
-    <div className="p-2">
+    
       <Input ref={ref} className={cn('h-8', className)} {...props} />
-    </div>
+    
   );
 });
 SidebarInput.displayName = 'SidebarInput';
@@ -327,13 +316,9 @@ const SidebarHeader = React.forwardRef<
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => {
   return (
-    <div
-      className={cn('flex items-center justify-between p-4', className)}
-      ref={ref}
-      {...props}
-    >
+    
       {children}
-    </div>
+    
   );
 });
 SidebarHeader.displayName = 'SidebarHeader';
@@ -343,13 +328,9 @@ const SidebarFooter = React.forwardRef<
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => {
   return (
-    <div
-      className={cn('mt-auto border-t p-4', className)}
-      ref={ref}
-      {...props}
-    >
+    
       {children}
-    </div>
+    
   );
 });
 SidebarFooter.displayName = 'SidebarFooter';
@@ -369,13 +350,9 @@ const SidebarContent = React.forwardRef<
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => {
   return (
-    <div
-      className={cn('flex-1 overflow-auto', className)}
-      ref={ref}
-      {...props}
-    >
+    
       {children}
-    </div>
+    
   );
 });
 SidebarContent.displayName = 'SidebarContent';
@@ -385,13 +362,9 @@ const SidebarGroup = React.forwardRef<
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => {
   return (
-    <div
-      className={cn('flex flex-col gap-y-1 p-2', className)}
-      ref={ref}
-      {...props}
-    >
+    
       {children}
-    </div>
+    
   );
 });
 SidebarGroup.displayName = 'SidebarGroup';
@@ -437,13 +410,9 @@ const SidebarGroupContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => (
-  <div
-    ref={ref}
-    className={cn('ml-4 border-l border-border pl-4', className)}
-    {...props}
-  >
+  
     {children}
-  </div>
+  
 ));
 SidebarGroupContent.displayName = 'SidebarGroupContent';
 
@@ -579,16 +548,9 @@ const SidebarMenuBadge = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      'ml-auto group-data-[state=collapsed]:hidden', // Hide badge in collapsed state
-      className
-    )}
-    {...props}
-  >
+  
     {children}
-  </div>
+  
 ));
 SidebarMenuBadge.displayName = 'SidebarMenuBadge';
 
@@ -603,23 +565,19 @@ const SidebarMenuSkeleton = React.forwardRef<
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className={cn('flex items-center gap-2 p-2', className)}
-      {...props}
-    >
+    
       {showIcon && (
         <Skeleton className="size-8 shrink-0 rounded-md group-data-[collapsible=icon]:size-8" />
       )}
-      <div className="flex flex-1 flex-col gap-1.5 overflow-hidden text-sm">
+      
         <Skeleton
           className="h-4 w-[var(--skeleton-width)]"
           style={{
             '--skeleton-width': width,
           } as React.CSSProperties}
         />
-      </div>
-    </div>
+      
+    
   );
 });
 SidebarMenuSkeleton.displayName = 'SidebarMenuSkeleton';
@@ -628,17 +586,9 @@ const SidebarMenuSub = React.forwardRef<
   HTMLUListElement,
   React.ComponentProps<'ul'>
 >(({className, children, ...props}, ref) => (
-  <ul
-    ref={ref}
-    className={cn(
-      'ml-6 space-y-1 border-l border-border py-1 pl-4',
-      'group-data-[state=collapsed]:hidden', // Hide sub-menu in collapsed state
-      className
-    )}
-    {...props}
-  >
+  
     {children}
-  </ul>
+  
 ));
 SidebarMenuSub.displayName = 'SidebarMenuSub';
 
@@ -705,26 +655,20 @@ function MainNav({className, items, pathname}: MainNavProps) {
   ];
 
   return (
-    <SidebarMenu className={cn('mt-4', className)}>
+    <ul>
       {mainItems.map(item => {
         const Icon = Icons[item.icon];
-        // Check if the current pathname starts with the item's href
-        // Special case for the root path '/' to avoid matching everything
         const isActive =
           item.href === '/'
             ? pathname === item.href
             : pathname
-            ? pathname.startsWith(item.href + '/') || pathname === item.href
+            ? (pathname.startsWith(item.href + '/') || pathname === item.href)
             : false;
 
         return (
           <SidebarMenuItem key={item.href}>
-            <SidebarMenuButton
-              asChild
-              isActive={isActive}
-              tooltip={item.title} // Add tooltip for collapsed state
-            >
-              <a href={item.href} className={cn('flex items-center gap-2', className)}>
+            <SidebarMenuButton href={item.href} asChild isActive={isActive}>
+              <a className={cn("flex items-center gap-2", className)}>
                 <Icon />
                 <span>{item.title}</span>
               </a>
@@ -732,7 +676,7 @@ function MainNav({className, items, pathname}: MainNavProps) {
           </SidebarMenuItem>
         );
       })}
-    </SidebarMenu>
+    </ul>
   );
 }
 
