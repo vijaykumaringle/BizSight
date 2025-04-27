@@ -80,13 +80,12 @@ export function TaxInsights({ income, expenses, currency, expenseBreakdown, inco
           // Check content type before assuming JSON
           const contentType = response.headers.get('content-type');
           let errorMessage = `HTTP error! status: ${response.status}`;
-          if (contentType && contentType.includes('application/json')) {
+           try {
             const errorData = await response.json();
             errorMessage = errorData.error || errorMessage;
-          } else {
-            // If not JSON, read as text to get potentially helpful server error messages
-            const errorText = await response.text();
-            errorMessage = `${errorMessage}: ${errorText}`;
+          } catch (jsonError) {
+             const errorText = await response.text();
+             errorMessage = `${errorMessage}: ${errorText}`;
             console.error("Raw error response from server:", errorText)
           }
           throw new Error(errorMessage);
@@ -94,8 +93,8 @@ export function TaxInsights({ income, expenses, currency, expenseBreakdown, inco
 
         const data = await response.json();
         if (data && data.insights && data.disclaimer) {
-            setInsights(data.insights);
-            setDisclaimer(data.disclaimer)
+            setInsights(data.insights || null);
+            setDisclaimer(data.disclaimer || null)
         }
         else {
             throw new Error("The API returned an invalid data structure.");
@@ -104,6 +103,8 @@ export function TaxInsights({ income, expenses, currency, expenseBreakdown, inco
         console.error("Error generating tax insights:", err);
         const error = err instanceof Error ? err.message : 'An unknown error occurred';
         setError(error);
+        setInsights(null);
+        setDisclaimer(null);
       }
     });
   };
@@ -125,7 +126,7 @@ export function TaxInsights({ income, expenses, currency, expenseBreakdown, inco
         {error && (
           <p className="text-sm text-red-600">Error: {error}</p>
         )}
-        {insights && !isPending && (
+        {insights !== null && !isPending && (
           <div className="space-y-2">
                 <pre className="whitespace-pre-wrap text-sm">{insights.replace(/\$(\d[\d,]*)/g, (match, number) => "₹" + Number(number.replace(/,/g, '')).toLocaleString('en-IN'))}</pre>
             
@@ -142,3 +143,4 @@ export function TaxInsights({ income, expenses, currency, expenseBreakdown, inco
       </CardFooter>
     </Card>
   );
+}

@@ -503,6 +503,10 @@ body {
   z-index: 100;
 }
 
+.z-20 {
+  z-index: 20;
+}
+
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
@@ -561,6 +565,10 @@ body {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.mt-1 {
+  margin-top: .25rem;
 }
 
 .block {
@@ -758,6 +766,10 @@ body {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[--sidebar-width-icon\] {
+  width: var(--sidebar-width-icon);
 }
 
 .min-w-\[--sidebar-width-icon\] {
@@ -1080,6 +1092,10 @@ body {
 
 .border-t-transparent {
   border-top-color: #0000;
+}
+
+.border-r-border {
+  border-right-color: hsl(var(--border));
 }
 
 .bg-\[--color-bg\] {
@@ -2168,6 +2184,22 @@ body {
   color: hsl(var(--sidebar-accent-foreground));
 }
 
+.group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:absolute {
+  position: absolute;
+}
+
+.group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:right-0 {
+  right: 0;
+}
+
+.group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:top-0 {
+  top: 0;
+}
+
+.group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:z-10 {
+  z-index: 10;
+}
+
 .group[data-state="collapsed"] .group-data-\[state\=collapsed\]\:hidden {
   display: none;
 }
@@ -2182,12 +2214,27 @@ body {
   height: 2rem;
 }
 
+.group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:-translate-y-1\/2 {
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:translate-x-1\/2 {
+  --tw-translate-x: 50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:\!p-0 {
   padding: 0 !important;
 }
 
 .group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:\!p-2 {
   padding: .5rem !important;
+}
+
+.group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:px-0 {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .dark\:border-destructive:is(.dark *) {
