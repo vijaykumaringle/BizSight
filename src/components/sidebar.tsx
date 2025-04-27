@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from 'react';
 import {Slot} from '@radix-ui/react-slot';
@@ -202,24 +202,9 @@ const Sidebar = React.forwardRef<
     }
 
     return (
-        <div
-          data-sidebar="sidebar"
-          data-state={state}
-          data-variant={variant}
-          data-collapsible={collapsible}
-          className={cn(
-            'group/sidebar fixed left-0 top-0 z-40 flex h-full min-w-[--sidebar-width-icon] flex-col justify-between overflow-hidden border-r bg-sidebar transition-[width,min-width] data-[state=collapsed]:min-w-[--sidebar-width-icon] data-[variant=floating]:border data-[variant=floating]:shadow-xl',
-            className
-          )}
-          style={{
-            '--radix-sidebar-width': SIDEBAR_WIDTH,
-            '--radix-sidebar-width-icon': SIDEBAR_WIDTH_ICON,
-          } as React.CSSProperties}
-          ref={ref}
-          {...props}
-        >
+        
           {children}
-        </div>
+        
     );
   }
 );
@@ -420,13 +405,9 @@ const SidebarMenu = React.forwardRef<
   HTMLUListElement,
   React.ComponentProps<'ul'>
 >(({className, children, ...props}, ref) => (
-  <ul
-    ref={ref}
-    className={cn('space-y-1 p-2', className)}
-    {...props}
-  >
+  
     {children}
-  </ul>
+  
 ));
 SidebarMenu.displayName = 'SidebarMenu';
 
@@ -487,14 +468,9 @@ const SidebarMenuButton = React.forwardRef<
     const {isMobile, state} = useSidebar();
 
     const buttonContent = (
-      <Comp
-        ref={ref}
-        className={cn(sidebarMenuButtonVariants({variant, size, className}))}
-        data-active={isActive}
-        {...props}
-      >
+      
         {children}
-      </Comp>
+      
     );
 
     if (!tooltip) {
@@ -505,15 +481,10 @@ const SidebarMenuButton = React.forwardRef<
       typeof tooltip === 'string' ? {children: tooltip} : tooltip;
 
     return (
-      <Tooltip>
-        <TooltipTrigger asChild>{buttonContent}</TooltipTrigger>
-        <TooltipContent
-          side="right"
-          align="center"
-          hidden={state !== 'collapsed' || isMobile}
-          {...tooltipContentProps}
-        />
-      </Tooltip>
+      
+        {buttonContent}
+        
+      
     );
   }
 );
@@ -566,16 +537,13 @@ const SidebarMenuSkeleton = React.forwardRef<
 
   return (
     
-      {showIcon && (
-        <Skeleton className="size-8 shrink-0 rounded-md group-data-[collapsible=icon]:size-8" />
-      )}
+      {showIcon ? (
+        
+      ) : null}
       
-        <Skeleton
-          className="h-4 w-[var(--skeleton-width)]"
-          style={{
-            '--skeleton-width': width,
-          } as React.CSSProperties}
-        />
+        
+          
+        
       
     
   );
@@ -640,7 +608,7 @@ interface MainNavItem {
 }
 
 interface MainNavProps {
-  pathname?: string; // Add pathname prop to determine active state
+  pathname?: string | null; // Add pathname prop to determine active state
   className?: string;
   items?: MainNavItem[];
 }
@@ -655,28 +623,23 @@ function MainNav({className, items, pathname}: MainNavProps) {
   ];
 
   return (
-    <SidebarMenu className={className}>
+    
       {mainItems.map(item => {
         const Icon = Icons[item.icon];
-        const isActive =
-          item.href === '/'
-            ? pathname === item.href
-            : pathname
-            ? (pathname.startsWith(item.href + '/') || pathname === item.href)
-            : false;
+        const isActive = item.href === '/' ? pathname === item.href : pathname ? (pathname.startsWith(item.href + '/') || pathname === item.href) : false;
 
         return (
-          <SidebarMenuItem key={item.href}>
-            <SidebarMenuButton href={item.href} asChild isActive={isActive}>
-              <a className={cn("flex items-center gap-2", className)}>
+          
+            
+              
                 <Icon />
-                <span>{item.title}</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+                
+              
+            
+          
         );
       })}
-    </SidebarMenu>
+    
   );
 }
 

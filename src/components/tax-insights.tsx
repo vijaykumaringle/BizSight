@@ -103,6 +103,8 @@ export function TaxInsights({ income, expenses, currency, expenseBreakdown, inco
         console.error("Error generating tax insights:", err);
         const error = err instanceof Error ? err.message : 'An unknown error occurred';
         setError(error);
+        setInsights(null);
+        setDisclaimer(null);
       }
     });
   };

@@ -28,19 +28,8 @@ const TaxDeductionInsightsOutputSchema = z.object({
 
 export type TaxDeductionInsightsOutput = z.infer<typeof TaxDeductionInsightsOutputSchema>;
 export async function taxDeductionInsights(input: TaxDeductionInsightsInput): Promise<TaxDeductionInsightsOutput> {
-  const { income, expenses } = input;
-  // Calculate a rough estimate of tax deductions (this is a simplified example)
-    const {deductionRate, country} = input
-    const estimatedDeductions = expenses * deductionRate;
-  
-    const insights = `Based on your income of ₹${income} and expenses of ₹${expenses}, you may have potential tax deductions of approximately ₹${estimatedDeductions.toFixed(2)} in ${country}. These are some of the insights: You may be eligible for deductions under sections like 80C, 80D, and others, such as HRA and business expenses. Make sure you are updated with ${country}'s tax laws. Please verify with your accountant.`;
-  
-    const disclaimer = `The tax insights provided are based on information related to ${country} and are not financial advice. Consult with a qualified tax professional in ${country} for personalized advice.`;
-
-
-    return { insights, disclaimer };
-
-  }
+  return taxDeductionInsightsFlow(input);
+}
 
 
 
@@ -59,11 +48,13 @@ const prompt = ai.definePrompt({
   output: {
     schema: z.object({
         insights: z.string().describe('AI-driven suggestions for potential tax deductions.'),
+        disclaimer: z.string().describe('Disclaimer about the provided insights.'),
     }),
   },
-  prompt: `You are an AI tax assistant providing insights on potential tax deductions for small business owners.
+  prompt: `You are an AI tax assistant providing insights on potential tax deductions for small business owners in {{{country}}}.
 
-  Based on the following income and expense information, provide a detailed list of potential tax deductions the user could explore. Include specific suggestions and actions the user can take.
+  Based on the following income and expense information, provide a detailed list of potential tax deductions the user could explore. Include specific suggestions and actions the user can take. Mention relevant sections of the tax law, if possible.
+  Also provide a disclaimer that these are only insights and the user should consult a tax professional.
 
   Income: {{{income}}}
   Expenses: {{{expenses}}}
@@ -71,9 +62,9 @@ const prompt = ai.definePrompt({
   Income Breakdown: {{{incomeBreakdown}}}
   Country: {{{country}}}
 
-  It is important to note that you are an AI and not a tax professional. Always recommend the user consult with a qualified professional.
+  It is important to note that you are an AI and not a tax professional. 
 
-  Return the output as a JSON object with "result" field.
+  Return the output as a JSON object with "insights" and "disclaimer" fields.
   `,
 });
 

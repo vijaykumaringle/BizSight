@@ -909,7 +909,7 @@ var { g: global, __dirname, k: __turbopack_refresh__, m: module, e: exports } = 
 {
 const e = new Error(`Could not parse module '[project]/src/components/sidebar.tsx'
 
-Expected ',', got '}'`);
+Unexpected token `(`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.`);
 e.code = 'MODULE_UNPARSEABLE';
 throw e;}}),
 }]);
