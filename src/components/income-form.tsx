@@ -20,11 +20,13 @@ const formSchema = z.object({
   }, {
     message: "Invalid date format."
   }),
-  amount: z.number({
+  amount: z.string({
     required_error: "Amount is required.",
-  }).positive({ message: "Amount must be a positive number." }),
+  })
+    .transform((amount) => Number(amount)).refine((amount) => amount >= 0, { message: "Amount must be a positive number" }),
+
   description: z.string().min(1, {
-    message: "Description must be at least 1 character.",
+      message: "Description must be at least 1 character."
   }),
   category: z.string().min(1, {
     message: "Category must be at least 1 character.",
@@ -37,19 +39,24 @@ interface IncomeFormProps {
 
 export function IncomeForm({ onIncomeAdded }: IncomeFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const today = new Date().toISOString().split('T')[0];
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: "",
-      amount: undefined,
-      description: "",
+        date: today,
+        amount: 0,
+        description: "",
       category: "",
+
+
     },
-  });
+  })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
+
       const response = await fetch("/api/income", {
         method: "POST",
         headers: {
@@ -57,7 +64,7 @@ export function IncomeForm({ onIncomeAdded }: IncomeFormProps) {
         },
         body: JSON.stringify(values),
       });
-
+      
       if (response.ok) {
         form.reset();
         onIncomeAdded();
@@ -81,7 +88,12 @@ export function IncomeForm({ onIncomeAdded }: IncomeFormProps) {
             <FormItem>
               <FormLabel>Date</FormLabel>
               <FormControl>
-                <Input type="date" placeholder="Date" {...field} />
+                <Input 
+                  type="date" 
+                  placeholder="Date" 
+                  value={field.value}
+                  onChange={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -94,7 +106,13 @@ export function IncomeForm({ onIncomeAdded }: IncomeFormProps) {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="Amount" {...field} />
+                <Input 
+                  type="number" 
+                  placeholder="Amount" 
+                  value={field.value}
+
+                  onChange={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -107,7 +125,11 @@ export function IncomeForm({ onIncomeAdded }: IncomeFormProps) {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input placeholder="Description" {...field} />
+                <Input 
+                  placeholder="Description" 
+                   value={field.value}
+                  onChange={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -120,7 +142,11 @@ export function IncomeForm({ onIncomeAdded }: IncomeFormProps) {
             <FormItem>
               <FormLabel>Category</FormLabel>
               <FormControl>
-                <Input placeholder="Category" {...field} />
+                <Input 
+                  placeholder="Category" 
+                   value={field.value}
+                  onChange={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

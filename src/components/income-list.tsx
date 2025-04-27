@@ -26,7 +26,10 @@ export function IncomeList({ incomeTransactions }: IncomeListProps) {
       <TableBody>
         {incomeTransactions.map((transaction) => (
           <TableRow key={transaction.id}>
-            <TableCell>{transaction.date.toLocaleDateString()}</TableCell>
+            {(() => {
+              const parsedDate = new Date(transaction.date);
+              return <TableCell>{parsedDate.toLocaleDateString()}</TableCell>;
+            })()}
             <TableCell>{transaction.amount}</TableCell>
             <TableCell>{transaction.description}</TableCell>
             <TableCell>{transaction.category}</TableCell>
