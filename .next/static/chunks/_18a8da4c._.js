@@ -408,9 +408,9 @@ var _s = __turbopack_context__.k.signature();
 const TAX_INSIGHTS_API_ENDPOINT = '/api/genkit/flows/taxDeductionInsights';
 function TaxInsights() {
     _s();
-    const [isPending, startTransition] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransition"])();
-    const [insights, setInsights] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [isPending, setIsPending] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [insights, setInsights] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null); // Initialize to null
     const handleGenerateInsights = ()=>{
         startTransition(async ()=>{
             setError(null);
@@ -434,22 +434,26 @@ function TaxInsights() {
                     body: JSON.stringify(requestData)
                 });
                 if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+                    // Check content type before assuming JSON
+                    const contentType = response.headers.get('content-type');
+                    let errorMessage = `HTTP error! status: ${response.status}`;
+                    if (contentType && contentType.includes('application/json')) {
+                        const errorData = await response.json();
+                        errorMessage = errorData.error || errorMessage;
+                    } else {
+                        // If not JSON, read as text to get potentially helpful server error messages
+                        const errorText = await response.text();
+                        errorMessage = `${errorMessage}: ${errorText}`;
+                        console.error("Raw error response from server:", errorText);
+                    }
+                    throw new Error(errorMessage);
                 }
-                const result = await response.json();
-                // Assuming the flow returns an object with an 'insights' property
-                // Adjust based on the actual structure of TaxDeductionInsightsOutput
-                if (result && result.output && typeof result.output.insights === 'string') {
-                    setInsights(result.output.insights);
-                } else {
-                    // Attempt to stringify if it's not in the expected format, or show raw
-                    setInsights(JSON.stringify(result.output, null, 2) || 'No specific insights found in response.');
-                }
+                const data = await response.json();
+                setInsights(data.output.insights);
             } catch (err) {
                 console.error("Error generating tax insights:", err);
-                setError(err instanceof Error ? err.message : 'An unknown error occurred.');
-                setInsights(null);
+                const error = err instanceof Error ? err.message : 'An unknown error occurred';
+                setError(error);
             }
         });
     };
@@ -461,20 +465,20 @@ function TaxInsights() {
                         children: "Tax Deduction Insights"
                     }, void 0, false, {
                         fileName: "[project]/src/components/tax-insights.tsx",
-                        lineNumber: 68,
+                        lineNumber: 73,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                         children: "Generate AI-powered insights based on your income and expenses."
                     }, void 0, false, {
                         fileName: "[project]/src/components/tax-insights.tsx",
-                        lineNumber: 69,
+                        lineNumber: 74,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/tax-insights.tsx",
-                lineNumber: 67,
+                lineNumber: 72,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -487,27 +491,27 @@ function TaxInsights() {
                                 className: "h-4 w-[250px]"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/tax-insights.tsx",
-                                lineNumber: 74,
+                                lineNumber: 79,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$skeleton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Skeleton"], {
                                 className: "h-4 w-[200px]"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/tax-insights.tsx",
-                                lineNumber: 75,
+                                lineNumber: 80,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$skeleton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Skeleton"], {
                                 className: "h-4 w-[220px]"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/tax-insights.tsx",
-                                lineNumber: 76,
+                                lineNumber: 81,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/tax-insights.tsx",
-                        lineNumber: 73,
+                        lineNumber: 78,
                         columnNumber: 13
                     }, this),
                     error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -518,7 +522,7 @@ function TaxInsights() {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/tax-insights.tsx",
-                        lineNumber: 80,
+                        lineNumber: 85,
                         columnNumber: 11
                     }, this),
                     insights && !isPending && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -528,18 +532,18 @@ function TaxInsights() {
                             children: insights
                         }, void 0, false, {
                             fileName: "[project]/src/components/tax-insights.tsx",
-                            lineNumber: 85,
+                            lineNumber: 90,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/tax-insights.tsx",
-                        lineNumber: 83,
+                        lineNumber: 88,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/tax-insights.tsx",
-                lineNumber: 71,
+                lineNumber: 76,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardFooter"], {
@@ -549,26 +553,22 @@ function TaxInsights() {
                     children: isPending ? 'Generating...' : 'Generate Tax Insights'
                 }, void 0, false, {
                     fileName: "[project]/src/components/tax-insights.tsx",
-                    lineNumber: 90,
+                    lineNumber: 95,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/tax-insights.tsx",
-                lineNumber: 89,
+                lineNumber: 94,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/tax-insights.tsx",
-        lineNumber: 66,
+        lineNumber: 71,
         columnNumber: 5
     }, this);
 }
-_s(TaxInsights, "mfEmiW8DchgFMJch8MNiM5xX8ls=", false, function() {
-    return [
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransition"]
-    ];
-});
+_s(TaxInsights, "qjkoE3BPUAQ/sfPgmhrSZyqLNnU=");
 _c = TaxInsights;
 var _c;
 __turbopack_context__.k.register(_c, "TaxInsights");
