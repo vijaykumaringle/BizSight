@@ -202,9 +202,9 @@ const Sidebar = React.forwardRef<
     }
 
     return (
-        
-          {children}
-        
+      
+        {children}
+      
     );
   }
 );
@@ -538,12 +538,13 @@ const SidebarMenuSkeleton = React.forwardRef<
   return (
     
       {showIcon ? (
-        
+        <Skeleton className="size-8 shrink-0 rounded-md group-data-[collapsible=icon]:size-8" />
       ) : null}
       
-        
-          
-        
+        <Skeleton
+          className="h-4 w-[var(--skeleton-width)]"
+          style={{"--skeleton-width": width} as React.CSSProperties}
+        />
       
     
   );
@@ -630,12 +631,17 @@ function MainNav({className, items, pathname}: MainNavProps) {
 
         return (
           
-            
-              
+            <SidebarMenuButton
+              key={item.href}
+              href={item.href}
+              asChild
+              isActive={isActive}
+            >
+              <a className={cn("flex items-center gap-2", className)}>
                 <Icon />
-                
-              
-            
+                <span>{item.title}</span>
+              </a>
+            </SidebarMenuButton>
           
         );
       })}

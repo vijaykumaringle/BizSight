@@ -126,7 +126,7 @@ export function TaxInsights({ income, expenses, currency, expenseBreakdown, inco
         {error && (
           <p className="text-sm text-red-600">Error: {error}</p>
         )}
-        {insights && !isPending && (
+        {insights !== null && !isPending && (
           <div className="space-y-2">
                 <pre className="whitespace-pre-wrap text-sm">{insights.replace(/\$(\d[\d,]*)/g, (match, number) => "₹" + Number(number.replace(/,/g, '')).toLocaleString('en-IN'))}</pre>
             
