@@ -20,15 +20,13 @@ const formSchema = z.object({
   }, {
     message: "Invalid date format."
   }),
-  amount: z.number({
-    required_error: "Amount is required.",
-  }).positive({ message: "Amount must be a positive number." }),
+  amount: z.string({ required_error: "Amount is required.", })
+    .transform((amount) => Number(amount))
+    .refine((amount) => amount >= 0, { message: "Amount must be a positive number" }),
   description: z.string().min(1, {
     message: "Description must be at least 1 character.",
   }),
-  category: z.string().min(1, {
-    message: "Category must be at least 1 character.",
-  }),
+  category: z.string().min(1, { message: "Category must be at least 1 character.", }),
 });
 
 interface ExpenseFormProps {
@@ -37,11 +35,13 @@ interface ExpenseFormProps {
 
 export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const today = new Date().toISOString().split('T')[0];
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: "",
-      amount: undefined,
+      date: today,
+      amount: "0",
       description: "",
       category: "",
     },
@@ -50,15 +50,15 @@ export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
+        
       const response = await fetch("/api/expenses", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      if (response.ok) {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
+  
+        if (response.ok) {
+        
         form.reset();
         onExpenseAdded();
       } else {
@@ -81,7 +81,13 @@ export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
             <FormItem>
               <FormLabel>Date</FormLabel>
               <FormControl>
-                <Input type="date" placeholder="Date" {...field} />
+                <Input 
+                  type="date" 
+                  placeholder="Date" 
+                  value={field.value}
+                  onChange={field.onChange}
+
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -94,7 +100,13 @@ export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="Amount" {...field} />
+                <Input 
+                  type="number" 
+                  placeholder="Amount" 
+                   value={field.value}
+                  onChange={field.onChange}
+
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -107,7 +119,12 @@ export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input placeholder="Description" {...field} />
+                <Input 
+                  placeholder="Description" 
+                  value={field.value}
+                  onChange={field.onChange}
+
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -120,7 +137,12 @@ export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
             <FormItem>
               <FormLabel>Category</FormLabel>
               <FormControl>
-                <Input placeholder="Category" {...field} />
+                <Input 
+                  placeholder="Category" 
+                  value={field.value}
+                  onChange={field.onChange}
+
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

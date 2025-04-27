@@ -25,12 +25,15 @@ export function ExpenseList({ expenseTransactions }: ExpenseListProps) {
       </TableHeader>
       <TableBody>
         {expenseTransactions.map((transaction) => (
-          <TableRow key={transaction.id}>
-            <TableCell>{transaction.date.toLocaleDateString()}</TableCell>
-            <TableCell>{transaction.amount}</TableCell>
-            <TableCell>{transaction.description}</TableCell>
-            <TableCell>{transaction.category}</TableCell>
-          </TableRow>
+          <TableRow key={transaction.id}>          
+          {(() => {
+              const parsedDate = new Date(transaction.date);
+              return <TableCell>{parsedDate.toLocaleDateString()}</TableCell>;
+            })()}
+             <TableCell>{transaction.amount}</TableCell>
+             <TableCell>{transaction.description}</TableCell>
+             <TableCell>{transaction.category}</TableCell>
+           </TableRow>
         ))}
       </TableBody>
     </Table>

@@ -1,25 +1,35 @@
 import { IncomeTransaction } from "@/lib/data";
 import { NextResponse } from "next/server";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 
-let incomeTransactions: IncomeTransaction[] = [];
+let incomeTransactions: IncomeTransaction[] = []
 
 export async function POST(request: Request) {
-  const body = await request.json();
+    try {
+      const body = await request.json();
 
-  const newIncomeTransaction: IncomeTransaction = {
-    id: uuidv4(),
-    date: new Date(body.date),
-    amount: body.amount,
-    description: body.description,
-    category: body.category,
-  };
+      // Basic validation (you should have more robust validation in a real app)
+        if (!body.date || !body.amount || !body.description || !body.category) {
+            return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+        }
 
-  incomeTransactions.push(newIncomeTransaction);
+        const newIncomeTransaction: IncomeTransaction = {
+            id: uuidv4(),
+            date: new Date(body.date),
+            amount: body.amount,
+            description: body.description,
+            category: body.category,
+        };
 
-    return NextResponse.json(newIncomeTransaction, { status: 201 });
+        incomeTransactions.push(newIncomeTransaction)
+
+        return NextResponse.json(newIncomeTransaction, { status: 200 });
+
+    } catch (error) {
+        return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+    }
 }
 
 export async function GET() {
-    return NextResponse.json(incomeTransactions, { status: 200 });
+    return NextResponse.json(incomeTransactions, { status: 200 })
 }
