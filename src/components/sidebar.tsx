@@ -202,9 +202,25 @@ const Sidebar = React.forwardRef<
     }
 
     return (
-      
+      <div
+        data-sidebar="sidebar"
+        data-variant={variant}
+        data-state={state}
+        data-collapsible={collapsible}
+        className={cn(
+          'group/sidebar z-20 flex h-full shrink-0 flex-col bg-sidebar text-sidebar-foreground',
+          state === 'expanded'
+            ? 'w-[--sidebar-width]'
+            : 'w-[--sidebar-width-icon]',
+          variant === 'floating' && 'absolute shadow-md',
+          variant === 'inset' && 'border-r border-r-border',
+          className
+        )}
+        ref={ref}
+        {...props}
+      >
         {children}
-      
+      </div>
     );
   }
 );
@@ -289,9 +305,9 @@ const SidebarInput = React.forwardRef<
   React.ComponentProps<typeof Input>
 >(({className, ...props}, ref) => {
   return (
-    
+    <div className="group/sidebar-input p-2">
       <Input ref={ref} className={cn('h-8', className)} {...props} />
-    
+    </div>
   );
 });
 SidebarInput.displayName = 'SidebarInput';
@@ -301,9 +317,13 @@ const SidebarHeader = React.forwardRef<
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => {
   return (
-    
+    <div
+      ref={ref}
+      className={cn('flex items-center justify-between p-2', className)}
+      {...props}
+    >
       {children}
-    
+    </div>
   );
 });
 SidebarHeader.displayName = 'SidebarHeader';
@@ -313,9 +333,13 @@ const SidebarFooter = React.forwardRef<
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => {
   return (
-    
+    <div
+      ref={ref}
+      className={cn('mt-auto flex items-center justify-between p-2', className)}
+      {...props}
+    >
       {children}
-    
+    </div>
   );
 });
 SidebarFooter.displayName = 'SidebarFooter';
@@ -335,9 +359,13 @@ const SidebarContent = React.forwardRef<
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => {
   return (
-    
+    <div
+      ref={ref}
+      className={cn('flex flex-1 flex-col overflow-hidden p-2', className)}
+      {...props}
+    >
       {children}
-    
+    </div>
   );
 });
 SidebarContent.displayName = 'SidebarContent';
@@ -347,9 +375,13 @@ const SidebarGroup = React.forwardRef<
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => {
   return (
-    
+    <div
+      ref={ref}
+      className={cn('group/sidebar-group flex items-center', className)}
+      {...props}
+    >
       {children}
-    
+    </div>
   );
 });
 SidebarGroup.displayName = 'SidebarGroup';
@@ -395,9 +427,9 @@ const SidebarGroupContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => (
-  
+  <div ref={ref} className={cn('flex-1', className)} {...props}>
     {children}
-  
+  </div>
 ));
 SidebarGroupContent.displayName = 'SidebarGroupContent';
 
@@ -405,9 +437,13 @@ const SidebarMenu = React.forwardRef<
   HTMLUListElement,
   React.ComponentProps<'ul'>
 >(({className, children, ...props}, ref) => (
-  
+  <ul
+    ref={ref}
+    className={cn('flex flex-col gap-1 group-data-[collapsible=icon]:px-0', className)}
+    {...props}
+  >
     {children}
-  
+  </ul>
 ));
 SidebarMenu.displayName = 'SidebarMenu';
 
@@ -468,9 +504,14 @@ const SidebarMenuButton = React.forwardRef<
     const {isMobile, state} = useSidebar();
 
     const buttonContent = (
-      
+      <Comp
+        ref={ref}
+        data-active={isActive}
+        className={cn(sidebarMenuButtonVariants({variant, size, className}))}
+        {...props}
+      >
         {children}
-      
+      </Comp>
     );
 
     if (!tooltip) {
@@ -481,10 +522,10 @@ const SidebarMenuButton = React.forwardRef<
       typeof tooltip === 'string' ? {children: tooltip} : tooltip;
 
     return (
-      
-        {buttonContent}
-        
-      
+      <Tooltip>
+        <TooltipTrigger asChild>{buttonContent}</TooltipTrigger>
+        <TooltipContent {...tooltipContentProps} />
+      </Tooltip>
     );
   }
 );
@@ -519,9 +560,16 @@ const SidebarMenuBadge = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'>
 >(({className, children, ...props}, ref) => (
-  
+  <div
+    ref={ref}
+    className={cn(
+      'ml-auto group-data-[collapsible=icon]:absolute group-data-[collapsible=icon]:right-0 group-data-[collapsible=icon]:top-0 group-data-[collapsible=icon]:z-10 group-data-[collapsible=icon]:translate-x-1/2 group-data-[collapsible=icon]:-translate-y-1/2',
+      className
+    )}
+    {...props}
+  >
     {children}
-  
+  </div>
 ));
 SidebarMenuBadge.displayName = 'SidebarMenuBadge';
 
@@ -536,17 +584,15 @@ const SidebarMenuSkeleton = React.forwardRef<
   }, []);
 
   return (
-    
+    <div ref={ref} className={cn('flex items-center gap-2', className)} {...props}>
       {showIcon ? (
         <Skeleton className="size-8 shrink-0 rounded-md group-data-[collapsible=icon]:size-8" />
       ) : null}
-      
-        <Skeleton
-          className="h-4 w-[var(--skeleton-width)]"
-          style={{"--skeleton-width": width} as React.CSSProperties}
-        />
-      
-    
+      <Skeleton
+        className="h-4 w-[var(--skeleton-width)]"
+        style={{"--skeleton-width": width} as React.CSSProperties}
+      />
+    </div>
   );
 });
 SidebarMenuSkeleton.displayName = 'SidebarMenuSkeleton';
@@ -555,9 +601,13 @@ const SidebarMenuSub = React.forwardRef<
   HTMLUListElement,
   React.ComponentProps<'ul'>
 >(({className, children, ...props}, ref) => (
-  
+  <ul
+    ref={ref}
+    className={cn('ml-6 mt-1 flex flex-col gap-1 border-l border-border pl-4', className)}
+    {...props}
+  >
     {children}
-  
+  </ul>
 ));
 SidebarMenuSub.displayName = 'SidebarMenuSub';
 
@@ -624,15 +674,14 @@ function MainNav({className, items, pathname}: MainNavProps) {
   ];
 
   return (
-    
+    <SidebarMenu>
       {mainItems.map(item => {
         const Icon = Icons[item.icon];
         const isActive = item.href === '/' ? pathname === item.href : pathname ? (pathname.startsWith(item.href + '/') || pathname === item.href) : false;
 
         return (
-          
+          <SidebarMenuItem key={item.href}>
             <SidebarMenuButton
-              key={item.href}
               href={item.href}
               asChild
               isActive={isActive}
@@ -642,10 +691,10 @@ function MainNav({className, items, pathname}: MainNavProps) {
                 <span>{item.title}</span>
               </a>
             </SidebarMenuButton>
-          
+          </SidebarMenuItem>
         );
       })}
-    
+    </SidebarMenu>
   );
 }
 
