@@ -70,10 +70,7 @@ const taxDeductionInsightsFlow = ai.defineFlow<
     outputSchema: TaxDeductionInsightsOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
-    return {
-      insights: output?.insights,
-      disclaimer: output?.disclaimer,
-    };
+    const output = await prompt(input);
+    return output.output!;
   }
 );
