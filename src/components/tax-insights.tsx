@@ -7,32 +7,33 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Skeleton } from "@/components/ui/skeleton";
 
 // Assuming the flow is exposed at this endpoint by Genkit
-const TAX_INSIGHTS_API_ENDPOINT = '/api/genkit/flows/taxDeductionInsights';
+const TAX_INSIGHTS_API_ENDPOINT = '/tax-insights';
 
 import * as Icons from "@/components/icons"
 
 export function TaxInsights() {
-  const [insights, setInsights] = useState<string | null>(null); // Initialize to null
+  const [insights, setInsights] = useState<string | null>(null);
   const [disclaimer, setDisclaimer] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const handleGenerateInsights = () => {
     startTransition(async () => {
-      setError(null);
+      setError(null); // Clear previous error
       setInsights(null); // Clear previous insights
-      setDisclaimer(null);
+      setDisclaimer(null); // Clear previous disclaimer
 
       try {
-        // TODO: Replace with actual income and expense data
-        // This data should likely be fetched from your application state or another API
+          // Simulate fetching income and expense data from your application's state or another API
+        // In a real application, you would fetch this from your data layer
+        const country = "India";
         const requestData = {
-          input: {
-            income: 50000, // Placeholder
-            expenses: 15000, // Placeholder
-            expenseBreakdown: "Office supplies: $500, Travel: $1000, Software: $200", // Placeholder
-            incomeBreakdown: "Client A: $30000, Client B: $20000", // Placeholder
-          }
+          income: 50000.00,
+          expenses: 15000.00,
+          expenseBreakdown: "Office supplies: ₹500, Travel: ₹1000, Software: ₹200",
+          incomeBreakdown: "Client A: ₹30000, Client B: ₹20000",
+          country: country,
+          
         };
 
         const response = await fetch(TAX_INSIGHTS_API_ENDPOINT, {
@@ -60,11 +61,12 @@ export function TaxInsights() {
         }
 
         const data = await response.json();
-        if (data.output) {
-            setInsights(data.output.insights || null);
-            setDisclaimer(data.output.disclaimer || null);
-        } else {
-            setError("Failed to retrieve insights. Please try again.");
+        if (data && data.insights && data.disclaimer) {
+            setInsights(data.insights);
+            setDisclaimer(data.disclaimer)
+        }
+        else {
+            throw new Error("The API returned an invalid data structure.");
         }
       } catch (err) {
         console.error("Error generating tax insights:", err);
@@ -93,11 +95,9 @@ export function TaxInsights() {
         )}
         {insights && !isPending && (
           <div className="space-y-2">
-            <div className="prose prose-sm max-w-none">
-              {/* Render insights - adjust formatting as needed */}
-              <pre className="whitespace-pre-wrap text-sm">{insights}</pre>
-            </div>
-            {disclaimer && (
+                <pre className="whitespace-pre-wrap text-sm">{insights.replace(/\$(\d[\d,]*)/g, (match, number) => "₹" + Number(number.replace(/,/g, '')).toLocaleString('en-IN'))}</pre>
+            
+                {disclaimer && (
               <p className="text-sm italic">{disclaimer}</p>
             )}
           </div>

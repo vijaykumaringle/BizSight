@@ -16,18 +16,34 @@ const TaxDeductionInsightsInputSchema = z.object({
   expenses: z.number().describe('Total expenses recorded.'),
   expenseBreakdown: z.string().describe('A detailed breakdown of the expenses.'),
   incomeBreakdown: z.string().describe('A detailed breakdown of the income sources.'),
+  country: z.string().describe('The country for which to generate tax insights.').default('INDIA')
 });
 export type TaxDeductionInsightsInput = z.infer<typeof TaxDeductionInsightsInputSchema>;
 
 const TaxDeductionInsightsOutputSchema = z.object({
   insights: z.string().describe('AI-driven suggestions for potential tax deductions.'),
-  disclaimer: z.string().describe('A disclaimer to consult with a professional.'),
+  disclaimer: z.string().describe('Disclaimer about the provided insights.')
 });
-export type TaxDeductionInsightsOutput = z.infer<typeof TaxDeductionInsightsOutputSchema>;
 
+export type TaxDeductionInsightsOutput = z.infer<typeof TaxDeductionInsightsOutputSchema>;
 export async function taxDeductionInsights(input: TaxDeductionInsightsInput): Promise<TaxDeductionInsightsOutput> {
-  return taxDeductionInsightsFlow(input);
-}
+  const { income, expenses } = input;
+  // Calculate a rough estimate of tax deductions (this is a simplified example)
+    const deductionRate = 0.2; // Example: 20% of expenses as potential deductions
+    const estimatedDeductions = expenses * deductionRate;
+  
+    const insights = `Based on your income of ₹${income} and expenses of ₹${expenses}, you may have potential tax deductions of approximately ₹${estimatedDeductions.toFixed(2)} in India. These are some of the insights: You may be eligible for deductions under sections like 80C, 80D, and others, such as HRA and business expenses. Make sure you are updated with India's tax laws. Please verify with your accountant.`;
+  
+    const disclaimer = 'The tax insights provided are based on information related to India and are not financial advice. Consult with a qualified tax professional in India for personalized advice.';
+  
+    
+
+    return { insights, disclaimer };
+
+  }
+
+
+
 
 const prompt = ai.definePrompt({
   name: 'taxDeductionInsightsPrompt',
@@ -41,8 +57,7 @@ const prompt = ai.definePrompt({
   },
   output: {
     schema: z.object({
-      insights: z.string().describe('AI-driven suggestions for potential tax deductions.'),
-      disclaimer: z.string().describe('A disclaimer to consult with a professional.'),
+        insights: z.string().describe('AI-driven suggestions for potential tax deductions.'),
     }),
   },
   prompt: `You are an AI tax assistant providing insights on potential tax deductions for small business owners.
@@ -56,7 +71,7 @@ const prompt = ai.definePrompt({
 
   It is important to note that you are an AI and not a tax professional. Always recommend the user consult with a qualified professional.
 
-  Return the output as a JSON object with "insights" and "disclaimer" fields.
+  Return the output as a JSON object with "result" field.
   `,
 });
 
