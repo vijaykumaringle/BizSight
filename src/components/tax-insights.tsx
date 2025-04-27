@@ -94,8 +94,8 @@ export function TaxInsights({ income, expenses, currency, expenseBreakdown, inco
 
         const data = await response.json();
         if (data && data.insights && data.disclaimer) {
-            setInsights(data.insights);
-            setDisclaimer(data.disclaimer)
+            setInsights(data.insights || null);
+            setDisclaimer(data.disclaimer || null)
         }
         else {
             throw new Error("The API returned an invalid data structure.");
@@ -142,3 +142,4 @@ export function TaxInsights({ income, expenses, currency, expenseBreakdown, inco
       </CardFooter>
     </Card>
   );
+}
