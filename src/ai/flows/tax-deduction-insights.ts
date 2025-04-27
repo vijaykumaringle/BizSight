@@ -1,4 +1,3 @@
-// Use server directive is required for Genkit flows.
 'use server';
 
 /**
@@ -22,7 +21,7 @@ export type TaxDeductionInsightsInput = z.infer<typeof TaxDeductionInsightsInput
 
 const TaxDeductionInsightsOutputSchema = z.object({
   insights: z.string().describe('AI-driven suggestions for potential tax deductions.'),
-  disclaimer: z.string().optional().describe('A disclaimer to consult with a professional.'),
+  disclaimer: z.string().describe('A disclaimer to consult with a professional.'),
 });
 export type TaxDeductionInsightsOutput = z.infer<typeof TaxDeductionInsightsOutputSchema>;
 
@@ -43,7 +42,7 @@ const prompt = ai.definePrompt({
   output: {
     schema: z.object({
       insights: z.string().describe('AI-driven suggestions for potential tax deductions.'),
-      disclaimer: z.string().optional().describe('A disclaimer to consult with a professional.'),
+      disclaimer: z.string().describe('A disclaimer to consult with a professional.'),
     }),
   },
   prompt: `You are an AI tax assistant providing insights on potential tax deductions for small business owners.
@@ -55,7 +54,9 @@ const prompt = ai.definePrompt({
   Expense Breakdown: {{{expenseBreakdown}}}
   Income Breakdown: {{{incomeBreakdown}}}
 
-  It is important to note that you are an AI and not a tax professional.  Always recommend the user consult with a qualified professional.
+  It is important to note that you are an AI and not a tax professional. Always recommend the user consult with a qualified professional.
+
+  Return the output as a JSON object with "insights" and "disclaimer" fields.
   `,
 });
 
@@ -70,6 +71,9 @@ const taxDeductionInsightsFlow = ai.defineFlow<
   },
   async input => {
     const {output} = await prompt(input);
-    return output!;
+    return {
+      insights: output?.insights ?? 'No insights found.',
+      disclaimer: output?.disclaimer ?? 'Consult with a tax professional for personalized advice.',
+    };
   }
 );
