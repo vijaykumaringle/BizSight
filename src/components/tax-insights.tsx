@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useTransition } from 'react';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -8,15 +9,19 @@ import { Skeleton } from "@/components/ui/skeleton";
 // Assuming the flow is exposed at this endpoint by Genkit
 const TAX_INSIGHTS_API_ENDPOINT = '/api/genkit/flows/taxDeductionInsights';
 
+import * as Icons from "@/components/icons"
+
 export function TaxInsights() {
-  const [isPending, startTransition] = useTransition();
-  const [insights, setInsights] = useState<string | null>(null);
+  const [insights, setInsights] = useState<string | null>(null); // Initialize to null
+  const [disclaimer, setDisclaimer] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   const handleGenerateInsights = () => {
     startTransition(async () => {
       setError(null);
       setInsights(null); // Clear previous insights
+      setDisclaimer(null);
 
       try {
         // TODO: Replace with actual income and expense data
@@ -39,25 +44,32 @@ export function TaxInsights() {
         });
 
         if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+          // Check content type before assuming JSON
+          const contentType = response.headers.get('content-type');
+          let errorMessage = `HTTP error! status: ${response.status}`;
+          if (contentType && contentType.includes('application/json')) {
+            const errorData = await response.json();
+            errorMessage = errorData.error || errorMessage;
+          } else {
+            // If not JSON, read as text to get potentially helpful server error messages
+            const errorText = await response.text();
+            errorMessage = `${errorMessage}: ${errorText}`;
+            console.error("Raw error response from server:", errorText)
+          }
+          throw new Error(errorMessage);
         }
 
-        const result = await response.json();
-        
-        // Assuming the flow returns an object with an 'insights' property
-        // Adjust based on the actual structure of TaxDeductionInsightsOutput
-        if (result && result.output && typeof result.output.insights === 'string') {
-           setInsights(result.output.insights);
+        const data = await response.json();
+        if (data.output) {
+            setInsights(data.output.insights || null);
+            setDisclaimer(data.output.disclaimer || null);
         } else {
-          // Attempt to stringify if it's not in the expected format, or show raw
-          setInsights(JSON.stringify(result.output, null, 2) || 'No specific insights found in response.');
+            setError("Failed to retrieve insights. Please try again.");
         }
-
       } catch (err) {
         console.error("Error generating tax insights:", err);
-        setError(err instanceof Error ? err.message : 'An unknown error occurred.');
-        setInsights(null);
+        const error = err instanceof Error ? err.message : 'An unknown error occurred';
+        setError(error);
       }
     });
   };
@@ -80,9 +92,14 @@ export function TaxInsights() {
           <p className="text-sm text-red-600">Error: {error}</p>
         )}
         {insights && !isPending && (
-          <div className="prose prose-sm max-w-none">
-            {/* Render insights - adjust formatting as needed */}
-            <pre className="whitespace-pre-wrap text-sm">{insights}</pre>
+          <div className="space-y-2">
+            <div className="prose prose-sm max-w-none">
+              {/* Render insights - adjust formatting as needed */}
+              <pre className="whitespace-pre-wrap text-sm">{insights}</pre>
+            </div>
+            {disclaimer && (
+              <p className="text-sm italic">{disclaimer}</p>
+            )}
           </div>
         )}
       </CardContent>

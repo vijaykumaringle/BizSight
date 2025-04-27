@@ -695,7 +695,7 @@ interface MainNavItem {
 }
 
 interface MainNavProps {
-  pathname: string // Add pathname prop to determine active state
+  pathname?: string // Add pathname prop to determine active state
   className?: string
   items?: MainNavItem[]
 }
@@ -716,7 +716,7 @@ function MainNav({ className, items, pathname }: MainNavProps) {
         // Check if the current pathname starts with the item's href
         // Special case for the root path '/' to avoid matching everything
         const isActive =
-          item.href === "/" ? pathname === item.href : pathname.startsWith(item.href)
+          item.href === "/" ? pathname === item.href : pathname ? pathname.startsWith(item.href) : false
 
         return (
           <SidebarMenuItem key={item.href}>
@@ -725,7 +725,7 @@ function MainNav({ className, items, pathname }: MainNavProps) {
               isActive={isActive}
               tooltip={item.title} // Add tooltip for collapsed state
             >
-              <a href={item.href}>
+              <a href={item.href} className={cn("flex items-center gap-2", className)}>
                 <Icon />
                 <span>{item.title}</span>
               </a>
