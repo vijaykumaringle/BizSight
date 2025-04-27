@@ -655,7 +655,7 @@ function MainNav({className, items, pathname}: MainNavProps) {
   ];
 
   return (
-    <ul>
+    <SidebarMenu className={className}>
       {mainItems.map(item => {
         const Icon = Icons[item.icon];
         const isActive =
@@ -676,7 +676,7 @@ function MainNav({className, items, pathname}: MainNavProps) {
           </SidebarMenuItem>
         );
       })}
-    </ul>
+    </SidebarMenu>
   );
 }
 
