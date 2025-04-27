@@ -408,9 +408,9 @@ var _s = __turbopack_context__.k.signature();
 const TAX_INSIGHTS_API_ENDPOINT = '/api/genkit/flows/taxDeductionInsights';
 function TaxInsights() {
     _s();
-    const [isPending, setIsPending] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [insights, setInsights] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null); // Initialize to null
+    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [isPending, startTransition] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransition"])();
     const handleGenerateInsights = ()=>{
         startTransition(async ()=>{
             setError(null);
@@ -568,7 +568,11 @@ function TaxInsights() {
         columnNumber: 5
     }, this);
 }
-_s(TaxInsights, "qjkoE3BPUAQ/sfPgmhrSZyqLNnU=");
+_s(TaxInsights, "tpvflJiqLplNyYP2U5TcJWngOuU=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransition"]
+    ];
+});
 _c = TaxInsights;
 var _c;
 __turbopack_context__.k.register(_c, "TaxInsights");

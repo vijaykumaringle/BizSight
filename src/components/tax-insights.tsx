@@ -12,9 +12,9 @@ const TAX_INSIGHTS_API_ENDPOINT = '/api/genkit/flows/taxDeductionInsights';
 import * as Icons from "@/components/icons"
 
 export function TaxInsights() {
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [insights, setInsights] = useState<string | null>(null); // Initialize to null
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   const handleGenerateInsights = () => {
     startTransition(async () => {
