@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useTransition } from 'react';
+import React, { useState, useTransition, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,14 +11,37 @@ const TAX_INSIGHTS_API_ENDPOINT = '/tax-insights';
 
 import * as Icons from "@/components/icons"
 
-export function TaxInsights() {
-  const [insights, setInsights] = useState<string | null>(null);
-  const [disclaimer, setDisclaimer] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+interface TaxInsightsProps {
+    income: number;
+    expenses: number;
+    currency: string;
+    expenseBreakdown: string;
+    incomeBreakdown: string;
+    country:string;
+    conversionRate:number;
+    deductionRate?:number;
+
+}
+
+export function TaxInsights({ income, expenses, currency, expenseBreakdown, incomeBreakdown, country, conversionRate }: TaxInsightsProps) {
+
+    const [insights, setInsights] = useState<string | null>(null);
+    const [disclaimer, setDisclaimer] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
+  const [localIncome, setLocalIncome] = useState<number>(income);
+  const [localExpenses, setLocalExpenses] = useState<number>(expenses);
+
+  useEffect(() => {
+    setLocalIncome(income);
+    setLocalExpenses(expenses);
+  }, [income, expenses]);
+
+  const effectiveDeductionRate = 0.2
+
   const handleGenerateInsights = () => {
-    startTransition(async () => {
+      startTransition(async () => {
       setError(null); // Clear previous error
       setInsights(null); // Clear previous insights
       setDisclaimer(null); // Clear previous disclaimer
@@ -26,14 +49,23 @@ export function TaxInsights() {
       try {
           // Simulate fetching income and expense data from your application's state or another API
         // In a real application, you would fetch this from your data layer
-        const country = "India";
-        const requestData = {
-          income: 50000.00,
-          expenses: 15000.00,
-          expenseBreakdown: "Office supplies: ₹500, Travel: ₹1000, Software: ₹200",
-          incomeBreakdown: "Client A: ₹30000, Client B: ₹20000",
-          country: country,
-          
+        let finalIncome = localIncome;
+        let finalExpenses = localExpenses;
+
+          if (currency === "INR") {
+            // Assuming a conversion rate of 80 INR to 1 USD for demonstration
+            finalIncome = localIncome / conversionRate;
+            finalExpenses = localExpenses / conversionRate;
+          }
+
+        const requestData = {          
+          income: finalIncome,
+          expenses: finalExpenses,
+          currency: currency, // Added currency to request
+          expenseBreakdown: expenseBreakdown, // Example breakdown, can be dynamic
+          incomeBreakdown: incomeBreakdown, // Example breakdown, can be dynamic
+          country: country || 'India', // Default to India if not provided
+          deductionRate: effectiveDeductionRate
         };
 
         const response = await fetch(TAX_INSIGHTS_API_ENDPOINT, {
@@ -110,4 +142,3 @@ export function TaxInsights() {
       </CardFooter>
     </Card>
   );
-}
