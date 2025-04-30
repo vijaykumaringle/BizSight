@@ -3,7 +3,7 @@
 import React from 'react';
 import {Slot} from '@radix-ui/react-slot';
 import {VariantProps, cva} from 'class-variance-authority';
-import {PanelLeft, X} from 'lucide-react';
+import {PanelLeft, X, Menu} from 'lucide-react';
 
 import {useIsMobile} from '@/hooks/use-mobile';
 import {cn} from '@/lib/utils';
@@ -250,9 +250,14 @@ const SidebarTrigger = React.forwardRef<
       {...props}
     >
       {isMobile ? (
-        <X className="h-4 w-4" />
+        <Menu className="h-4 w-4" />
       ) : (
-        <PanelLeft className="h-4 w-4" />
+        <PanelLeft
+        
+          className={cn(
+            "h-4 w-4"
+          )}
+         />
       )}
     </Button>
   );
