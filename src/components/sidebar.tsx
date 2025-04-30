@@ -328,6 +328,24 @@ const SidebarHeader = React.forwardRef<
 });
 SidebarHeader.displayName = 'SidebarHeader';
 
+function ProfileLink() {
+  return (
+    <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton
+            href="/profile"
+            asChild
+          >
+            <a className="flex items-center gap-2">
+              <Icons.user />
+              <span>Profile</span>
+            </a>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+    </SidebarMenu>
+  );
+}
+
 const SidebarFooter = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'>
@@ -338,7 +356,8 @@ const SidebarFooter = React.forwardRef<
       className={cn('mt-auto flex items-center justify-between p-2', className)}
       {...props}
     >
-      {children}
+         <ProfileLink/>
+
     </div>
   );
 });
@@ -692,13 +711,15 @@ function MainNav({className, items, pathname}: MainNavProps) {
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
+
         );
       })}
     </SidebarMenu>
   );
 }
 
-export {
+
+export {ProfileLink,
   MainNav,
   Sidebar,
   SidebarContent,

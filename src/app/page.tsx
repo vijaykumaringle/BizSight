@@ -6,7 +6,7 @@ import {DashboardMetrics} from '@/components/dashboard-metrics';
 import {AppointmentCalendar} from '@/components/appointment-calendar';
 import {TaxInsights} from '@/components/tax-insights';
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
-import {SidebarProvider, Sidebar, SidebarContent, MainNav} from '@/components/sidebar';
+import {SidebarProvider, Sidebar, SidebarContent, MainNav, SidebarFooter} from '@/components/sidebar';
 
 export default function Home() {
   const pathname = usePathname(); // Get the current pathname
@@ -28,11 +28,14 @@ export default function Home() {
   return (
     <SidebarProvider>
       <Sidebar collapsible="icon">
-        <SidebarContent>
-          {/* Pass the pathname to MainNav */}
-          <MainNav pathname={pathname} />
-        </SidebarContent>
-      </Sidebar>
+          <SidebarContent>
+            {/* Pass the pathname to MainNav */}
+            <MainNav pathname={pathname} />
+          </SidebarContent>
+          <SidebarFooter/>
+        </Sidebar>
+
+
       <div className="flex-1 p-4">
         <div className="flex flex-col h-full">
           <DashboardHeader />

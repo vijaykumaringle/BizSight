@@ -112,7 +112,6 @@ export function TaxInsights({ income, expenses, currency, expenseBreakdown, inco
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Tax Deduction Insights</CardTitle>
         <CardDescription>Generate AI-powered insights based on your income and expenses.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">

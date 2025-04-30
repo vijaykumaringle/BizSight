@@ -910,6 +910,7 @@ var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_
 {
 __turbopack_context__.s({
     "MainNav": (()=>MainNav),
+    "ProfileLink": (()=>ProfileLink),
     "Sidebar": (()=>Sidebar),
     "SidebarContent": (()=>SidebarContent),
     "SidebarFooter": (()=>SidebarFooter),
@@ -1289,34 +1290,82 @@ const SidebarHeader = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5
 });
 _c13 = SidebarHeader;
 SidebarHeader.displayName = 'SidebarHeader';
-const SidebarFooter = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c14 = ({ className, children, ...props }, ref)=>{
+function ProfileLink() {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(SidebarMenu, {
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(SidebarMenuItem, {
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(SidebarMenuButton, {
+                href: "/profile",
+                asChild: true,
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                    className: "flex items-center gap-2",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$icons$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Icons"].user, {}, void 0, false, {
+                            fileName: "[project]/src/components/sidebar.tsx",
+                            lineNumber: 340,
+                            columnNumber: 15
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            children: "Profile"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/sidebar.tsx",
+                            lineNumber: 341,
+                            columnNumber: 15
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/sidebar.tsx",
+                    lineNumber: 339,
+                    columnNumber: 13
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/components/sidebar.tsx",
+                lineNumber: 335,
+                columnNumber: 11
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/sidebar.tsx",
+            lineNumber: 334,
+            columnNumber: 9
+        }, this)
+    }, void 0, false, {
+        fileName: "[project]/src/components/sidebar.tsx",
+        lineNumber: 333,
+        columnNumber: 5
+    }, this);
+}
+_c14 = ProfileLink;
+const SidebarFooter = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c15 = ({ className, children, ...props }, ref)=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: ref,
         className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])('mt-auto flex items-center justify-between p-2', className),
         ...props,
-        children: children
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ProfileLink, {}, void 0, false, {
+            fileName: "[project]/src/components/sidebar.tsx",
+            lineNumber: 359,
+            columnNumber: 10
+        }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 336,
+        lineNumber: 354,
         columnNumber: 5
     }, this);
 });
-_c15 = SidebarFooter;
+_c16 = SidebarFooter;
 SidebarFooter.displayName = 'SidebarFooter';
-const SidebarSeparator = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c16 = ({ className, ...props }, ref)=>{
+const SidebarSeparator = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c17 = ({ className, ...props }, ref)=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$separator$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Separator"], {
         ref: ref,
         className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])('my-2', className),
         ...props
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 352,
+        lineNumber: 371,
         columnNumber: 5
     }, this);
 });
-_c17 = SidebarSeparator;
+_c18 = SidebarSeparator;
 SidebarSeparator.displayName = 'SidebarSeparator';
-const SidebarContent = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c18 = ({ className, children, ...props }, ref)=>{
+const SidebarContent = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c19 = ({ className, children, ...props }, ref)=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: ref,
         className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])('flex flex-1 flex-col overflow-hidden p-2', className),
@@ -1324,13 +1373,13 @@ const SidebarContent = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 362,
+        lineNumber: 381,
         columnNumber: 5
     }, this);
 });
-_c19 = SidebarContent;
+_c20 = SidebarContent;
 SidebarContent.displayName = 'SidebarContent';
-const SidebarGroup = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c20 = ({ className, children, ...props }, ref)=>{
+const SidebarGroup = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c21 = ({ className, children, ...props }, ref)=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: ref,
         className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])('group/sidebar-group flex items-center', className),
@@ -1338,13 +1387,13 @@ const SidebarGroup = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 378,
+        lineNumber: 397,
         columnNumber: 5
     }, this);
 });
-_c21 = SidebarGroup;
+_c22 = SidebarGroup;
 SidebarGroup.displayName = 'SidebarGroup';
-const SidebarGroupLabel = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c22 = ({ className, asChild = false, children, ...props }, ref)=>{
+const SidebarGroupLabel = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c23 = ({ className, asChild = false, children, ...props }, ref)=>{
     const Comp = asChild ? __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$react$2d$slot$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Slot"] : 'div';
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Comp, {
         ref: ref,
@@ -1353,13 +1402,13 @@ const SidebarGroupLabel = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$proje
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 395,
+        lineNumber: 414,
         columnNumber: 5
     }, this);
 });
-_c23 = SidebarGroupLabel;
+_c24 = SidebarGroupLabel;
 SidebarGroupLabel.displayName = 'SidebarGroupLabel';
-const SidebarGroupAction = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c24 = ({ className, asChild = false, children, ...props }, ref)=>{
+const SidebarGroupAction = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c25 = ({ className, asChild = false, children, ...props }, ref)=>{
     const Comp = asChild ? __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$react$2d$slot$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Slot"] : 'button';
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Comp, {
         ref: ref,
@@ -1368,23 +1417,23 @@ const SidebarGroupAction = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$proj
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 415,
+        lineNumber: 434,
         columnNumber: 5
     }, this);
 });
-_c25 = SidebarGroupAction;
+_c26 = SidebarGroupAction;
 SidebarGroupAction.displayName = 'SidebarGroupAction';
-const SidebarGroupContent = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c26 = ({ className, children, ...props }, ref)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+const SidebarGroupContent = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c27 = ({ className, children, ...props }, ref)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: ref,
         className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])('flex-1', className),
         ...props,
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 430,
+        lineNumber: 449,
         columnNumber: 3
     }, this));
-_c27 = SidebarGroupContent;
+_c28 = SidebarGroupContent;
 SidebarGroupContent.displayName = 'SidebarGroupContent';
 const SidebarMenu = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(({ className, children, ...props }, ref)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
         ref: ref,
@@ -1393,10 +1442,10 @@ const SidebarMenu = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 440,
+        lineNumber: 459,
         columnNumber: 3
     }, this));
-_c28 = SidebarMenu;
+_c29 = SidebarMenu;
 SidebarMenu.displayName = 'SidebarMenu';
 const SidebarMenuItem = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(({ className, children, ...props }, ref)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
         ref: ref,
@@ -1405,10 +1454,10 @@ const SidebarMenuItem = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 454,
+        lineNumber: 473,
         columnNumber: 3
     }, this));
-_c29 = SidebarMenuItem;
+_c30 = SidebarMenuItem;
 SidebarMenuItem.displayName = 'SidebarMenuItem';
 const sidebarMenuButtonVariants = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$class$2d$variance$2d$authority$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cva"])('peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0', {
     variants: {
@@ -1443,7 +1492,7 @@ const SidebarMenuButton = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$proje
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 507,
+        lineNumber: 526,
         columnNumber: 7
     }, this);
     if (!tooltip) {
@@ -1459,20 +1508,20 @@ const SidebarMenuButton = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$proje
                 children: buttonContent
             }, void 0, false, {
                 fileName: "[project]/src/components/sidebar.tsx",
-                lineNumber: 526,
+                lineNumber: 545,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$tooltip$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TooltipContent"], {
                 ...tooltipContentProps
             }, void 0, false, {
                 fileName: "[project]/src/components/sidebar.tsx",
-                lineNumber: 527,
+                lineNumber: 546,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 525,
+        lineNumber: 544,
         columnNumber: 7
     }, this);
 }, "GVYB5k0W5WxxYm+YYcxKC4dseUA=", false, function() {
@@ -1480,9 +1529,9 @@ const SidebarMenuButton = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$proje
         useSidebar
     ];
 }));
-_c30 = SidebarMenuButton;
+_c31 = SidebarMenuButton;
 SidebarMenuButton.displayName = 'SidebarMenuButton';
-const SidebarMenuAction = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c31 = ({ className, asChild = false, showOnHover = false, children, ...props }, ref)=>{
+const SidebarMenuAction = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c32 = ({ className, asChild = false, showOnHover = false, children, ...props }, ref)=>{
     const Comp = asChild ? __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$react$2d$slot$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Slot"] : 'button';
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Comp, {
         ref: ref,
@@ -1491,25 +1540,25 @@ const SidebarMenuAction = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$proje
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 543,
+        lineNumber: 562,
         columnNumber: 5
     }, this);
 });
-_c32 = SidebarMenuAction;
+_c33 = SidebarMenuAction;
 SidebarMenuAction.displayName = 'SidebarMenuAction';
-const SidebarMenuBadge = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c33 = ({ className, children, ...props }, ref)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+const SidebarMenuBadge = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c34 = ({ className, children, ...props }, ref)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: ref,
         className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])('ml-auto group-data-[collapsible=icon]:absolute group-data-[collapsible=icon]:right-0 group-data-[collapsible=icon]:top-0 group-data-[collapsible=icon]:z-10 group-data-[collapsible=icon]:translate-x-1/2 group-data-[collapsible=icon]:-translate-y-1/2', className),
         ...props,
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 563,
+        lineNumber: 582,
         columnNumber: 3
     }, this));
-_c34 = SidebarMenuBadge;
+_c35 = SidebarMenuBadge;
 SidebarMenuBadge.displayName = 'SidebarMenuBadge';
-const SidebarMenuSkeleton = /*#__PURE__*/ _s6(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c35 = _s6(({ className, showIcon = false, ...props }, ref)=>{
+const SidebarMenuSkeleton = /*#__PURE__*/ _s6(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c36 = _s6(({ className, showIcon = false, ...props }, ref)=>{
     _s6();
     const width = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useMemo({
         "SidebarMenuSkeleton.useMemo[width]": ()=>{
@@ -1525,7 +1574,7 @@ const SidebarMenuSkeleton = /*#__PURE__*/ _s6(__TURBOPACK__imported__module__$5b
                 className: "size-8 shrink-0 rounded-md group-data-[collapsible=icon]:size-8"
             }, void 0, false, {
                 fileName: "[project]/src/components/sidebar.tsx",
-                lineNumber: 589,
+                lineNumber: 608,
                 columnNumber: 9
             }, this) : null,
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$skeleton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Skeleton"], {
@@ -1535,31 +1584,31 @@ const SidebarMenuSkeleton = /*#__PURE__*/ _s6(__TURBOPACK__imported__module__$5b
                 }
             }, void 0, false, {
                 fileName: "[project]/src/components/sidebar.tsx",
-                lineNumber: 591,
+                lineNumber: 610,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 587,
+        lineNumber: 606,
         columnNumber: 5
     }, this);
 }, "nKFjX4dxbYo91VAj5VdWQ1XUe3I=")), "nKFjX4dxbYo91VAj5VdWQ1XUe3I=");
-_c36 = SidebarMenuSkeleton;
+_c37 = SidebarMenuSkeleton;
 SidebarMenuSkeleton.displayName = 'SidebarMenuSkeleton';
-const SidebarMenuSub = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c37 = ({ className, children, ...props }, ref)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+const SidebarMenuSub = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c38 = ({ className, children, ...props }, ref)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
         ref: ref,
         className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])('ml-6 mt-1 flex flex-col gap-1 border-l border-border pl-4', className),
         ...props,
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 604,
+        lineNumber: 623,
         columnNumber: 3
     }, this));
-_c38 = SidebarMenuSub;
+_c39 = SidebarMenuSub;
 SidebarMenuSub.displayName = 'SidebarMenuSub';
-const SidebarMenuSubItem = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c39 = ({ className, children, ...props }, ref)=>{
+const SidebarMenuSubItem = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c40 = ({ className, children, ...props }, ref)=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
         ref: ref,
         className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])(className),
@@ -1567,13 +1616,13 @@ const SidebarMenuSubItem = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$proj
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 619,
+        lineNumber: 638,
         columnNumber: 5
     }, this);
 });
-_c40 = SidebarMenuSubItem;
+_c41 = SidebarMenuSubItem;
 SidebarMenuSubItem.displayName = 'SidebarMenuSubItem';
-const SidebarMenuSubButton = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c41 = ({ asChild = false, size = 'md', isActive, className, children, ...props }, ref)=>{
+const SidebarMenuSubButton = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].forwardRef(_c42 = ({ asChild = false, size = 'md', isActive, className, children, ...props }, ref)=>{
     const Comp = asChild ? __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$react$2d$slot$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Slot"] : 'a';
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Comp, {
         ref: ref,
@@ -1582,11 +1631,11 @@ const SidebarMenuSubButton = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$pr
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 637,
+        lineNumber: 656,
         columnNumber: 5
     }, this);
 });
-_c42 = SidebarMenuSubButton;
+_c43 = SidebarMenuSubButton;
 SidebarMenuSubButton.displayName = 'SidebarMenuSubButton';
 function MainNav({ className, items, pathname }) {
     const mainItems = items ?? [
@@ -1630,42 +1679,42 @@ function MainNav({ className, items, pathname }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {}, void 0, false, {
                                 fileName: "[project]/src/components/sidebar.tsx",
-                                lineNumber: 690,
+                                lineNumber: 709,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 children: item.title
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sidebar.tsx",
-                                lineNumber: 691,
+                                lineNumber: 710,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/sidebar.tsx",
-                        lineNumber: 689,
+                        lineNumber: 708,
                         columnNumber: 15
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/sidebar.tsx",
-                    lineNumber: 684,
+                    lineNumber: 703,
                     columnNumber: 13
                 }, this)
             }, item.href, false, {
                 fileName: "[project]/src/components/sidebar.tsx",
-                lineNumber: 683,
+                lineNumber: 702,
                 columnNumber: 11
             }, this);
         })
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 677,
+        lineNumber: 696,
         columnNumber: 5
     }, this);
 }
-_c43 = MainNav;
+_c44 = MainNav;
 ;
-var _c, _c1, _c2, _c3, _c4, _c5, _c6, _c7, _c8, _c9, _c10, _c11, _c12, _c13, _c14, _c15, _c16, _c17, _c18, _c19, _c20, _c21, _c22, _c23, _c24, _c25, _c26, _c27, _c28, _c29, _c30, _c31, _c32, _c33, _c34, _c35, _c36, _c37, _c38, _c39, _c40, _c41, _c42, _c43;
+var _c, _c1, _c2, _c3, _c4, _c5, _c6, _c7, _c8, _c9, _c10, _c11, _c12, _c13, _c14, _c15, _c16, _c17, _c18, _c19, _c20, _c21, _c22, _c23, _c24, _c25, _c26, _c27, _c28, _c29, _c30, _c31, _c32, _c33, _c34, _c35, _c36, _c37, _c38, _c39, _c40, _c41, _c42, _c43, _c44;
 __turbopack_context__.k.register(_c, "SidebarProvider$React.forwardRef");
 __turbopack_context__.k.register(_c1, "SidebarProvider");
 __turbopack_context__.k.register(_c2, "Sidebar$React.forwardRef");
@@ -1680,36 +1729,37 @@ __turbopack_context__.k.register(_c10, "SidebarInput$React.forwardRef");
 __turbopack_context__.k.register(_c11, "SidebarInput");
 __turbopack_context__.k.register(_c12, "SidebarHeader$React.forwardRef");
 __turbopack_context__.k.register(_c13, "SidebarHeader");
-__turbopack_context__.k.register(_c14, "SidebarFooter$React.forwardRef");
-__turbopack_context__.k.register(_c15, "SidebarFooter");
-__turbopack_context__.k.register(_c16, "SidebarSeparator$React.forwardRef");
-__turbopack_context__.k.register(_c17, "SidebarSeparator");
-__turbopack_context__.k.register(_c18, "SidebarContent$React.forwardRef");
-__turbopack_context__.k.register(_c19, "SidebarContent");
-__turbopack_context__.k.register(_c20, "SidebarGroup$React.forwardRef");
-__turbopack_context__.k.register(_c21, "SidebarGroup");
-__turbopack_context__.k.register(_c22, "SidebarGroupLabel$React.forwardRef");
-__turbopack_context__.k.register(_c23, "SidebarGroupLabel");
-__turbopack_context__.k.register(_c24, "SidebarGroupAction$React.forwardRef");
-__turbopack_context__.k.register(_c25, "SidebarGroupAction");
-__turbopack_context__.k.register(_c26, "SidebarGroupContent$React.forwardRef");
-__turbopack_context__.k.register(_c27, "SidebarGroupContent");
-__turbopack_context__.k.register(_c28, "SidebarMenu");
-__turbopack_context__.k.register(_c29, "SidebarMenuItem");
-__turbopack_context__.k.register(_c30, "SidebarMenuButton");
-__turbopack_context__.k.register(_c31, "SidebarMenuAction$React.forwardRef");
-__turbopack_context__.k.register(_c32, "SidebarMenuAction");
-__turbopack_context__.k.register(_c33, "SidebarMenuBadge$React.forwardRef");
-__turbopack_context__.k.register(_c34, "SidebarMenuBadge");
-__turbopack_context__.k.register(_c35, "SidebarMenuSkeleton$React.forwardRef");
-__turbopack_context__.k.register(_c36, "SidebarMenuSkeleton");
-__turbopack_context__.k.register(_c37, "SidebarMenuSub$React.forwardRef");
-__turbopack_context__.k.register(_c38, "SidebarMenuSub");
-__turbopack_context__.k.register(_c39, "SidebarMenuSubItem$React.forwardRef");
-__turbopack_context__.k.register(_c40, "SidebarMenuSubItem");
-__turbopack_context__.k.register(_c41, "SidebarMenuSubButton$React.forwardRef");
-__turbopack_context__.k.register(_c42, "SidebarMenuSubButton");
-__turbopack_context__.k.register(_c43, "MainNav");
+__turbopack_context__.k.register(_c14, "ProfileLink");
+__turbopack_context__.k.register(_c15, "SidebarFooter$React.forwardRef");
+__turbopack_context__.k.register(_c16, "SidebarFooter");
+__turbopack_context__.k.register(_c17, "SidebarSeparator$React.forwardRef");
+__turbopack_context__.k.register(_c18, "SidebarSeparator");
+__turbopack_context__.k.register(_c19, "SidebarContent$React.forwardRef");
+__turbopack_context__.k.register(_c20, "SidebarContent");
+__turbopack_context__.k.register(_c21, "SidebarGroup$React.forwardRef");
+__turbopack_context__.k.register(_c22, "SidebarGroup");
+__turbopack_context__.k.register(_c23, "SidebarGroupLabel$React.forwardRef");
+__turbopack_context__.k.register(_c24, "SidebarGroupLabel");
+__turbopack_context__.k.register(_c25, "SidebarGroupAction$React.forwardRef");
+__turbopack_context__.k.register(_c26, "SidebarGroupAction");
+__turbopack_context__.k.register(_c27, "SidebarGroupContent$React.forwardRef");
+__turbopack_context__.k.register(_c28, "SidebarGroupContent");
+__turbopack_context__.k.register(_c29, "SidebarMenu");
+__turbopack_context__.k.register(_c30, "SidebarMenuItem");
+__turbopack_context__.k.register(_c31, "SidebarMenuButton");
+__turbopack_context__.k.register(_c32, "SidebarMenuAction$React.forwardRef");
+__turbopack_context__.k.register(_c33, "SidebarMenuAction");
+__turbopack_context__.k.register(_c34, "SidebarMenuBadge$React.forwardRef");
+__turbopack_context__.k.register(_c35, "SidebarMenuBadge");
+__turbopack_context__.k.register(_c36, "SidebarMenuSkeleton$React.forwardRef");
+__turbopack_context__.k.register(_c37, "SidebarMenuSkeleton");
+__turbopack_context__.k.register(_c38, "SidebarMenuSub$React.forwardRef");
+__turbopack_context__.k.register(_c39, "SidebarMenuSub");
+__turbopack_context__.k.register(_c40, "SidebarMenuSubItem$React.forwardRef");
+__turbopack_context__.k.register(_c41, "SidebarMenuSubItem");
+__turbopack_context__.k.register(_c42, "SidebarMenuSubButton$React.forwardRef");
+__turbopack_context__.k.register(_c43, "SidebarMenuSubButton");
+__turbopack_context__.k.register(_c44, "MainNav");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
 }
