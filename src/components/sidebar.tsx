@@ -6,6 +6,8 @@ import {VariantProps, cva} from 'class-variance-authority';
 import {PanelLeft, X, Menu} from 'lucide-react';
 
 import {useIsMobile} from '@/hooks/use-mobile';
+import { Icons } from './icons';
+
 import {cn} from '@/lib/utils';
 import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
@@ -18,8 +20,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-
-import {Icons} from './icons';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -604,6 +604,7 @@ const SidebarMenuSkeleton = React.forwardRef<
   }
 >(({className, showIcon = false, ...props}, ref) => {
   const width = React.useMemo(() => {
+
     return `${Math.floor(Math.random() * 40) + 50}%`;
   }, []);
 
@@ -695,6 +696,10 @@ function MainNav({className, items, pathname}: MainNavProps) {
     {href: '/income', icon: 'income', title: 'Income'},
     {href: '/expenses', icon: 'expense', title: 'Expenses'},
     {href: '/tax-insights', icon: 'taxInsights', title: 'Tax Insights'},
+    {href: '/invoices', icon: 'invoice', title: 'Invoices'},
+
+    {href: '/inventory', icon: 'inventory', title: 'Inventory'},
+    {href: '/orders', icon: 'order', title: 'Orders'},
   ];
 
   return (

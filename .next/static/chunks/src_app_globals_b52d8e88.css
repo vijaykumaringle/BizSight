@@ -606,6 +606,10 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.mr-2 {
+  margin-right: .5rem;
+}
+
 .block {
   display: block;
 }
@@ -809,6 +813,10 @@ body {
 
 .w-auto {
   width: auto;
+}
+
+.w-32 {
+  width: 8rem;
 }
 
 .min-w-\[12rem\] {
