@@ -1468,6 +1468,21 @@ function MainNav({ className, items, pathname }) {
             href: '/tax-insights',
             icon: 'taxInsights',
             title: 'Tax Insights'
+        },
+        {
+            href: '/invoices',
+            icon: 'invoice',
+            title: 'Invoices'
+        },
+        {
+            href: '/inventory',
+            icon: 'inventory',
+            title: 'Inventory'
+        },
+        {
+            href: '/orders',
+            icon: 'order',
+            title: 'Orders'
         }
     ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(SidebarMenu, {
@@ -1484,36 +1499,36 @@ function MainNav({ className, items, pathname }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {}, void 0, false, {
                                 fileName: "[project]/src/components/sidebar.tsx",
-                                lineNumber: 714,
+                                lineNumber: 717,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 children: item.title
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sidebar.tsx",
-                                lineNumber: 715,
+                                lineNumber: 718,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/sidebar.tsx",
-                        lineNumber: 713,
+                        lineNumber: 716,
                         columnNumber: 15
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/sidebar.tsx",
-                    lineNumber: 708,
+                    lineNumber: 711,
                     columnNumber: 13
                 }, this)
             }, item.href, false, {
                 fileName: "[project]/src/components/sidebar.tsx",
-                lineNumber: 707,
+                lineNumber: 710,
                 columnNumber: 11
             }, this);
         })
     }, void 0, false, {
         fileName: "[project]/src/components/sidebar.tsx",
-        lineNumber: 701,
+        lineNumber: 704,
         columnNumber: 5
     }, this);
 }
