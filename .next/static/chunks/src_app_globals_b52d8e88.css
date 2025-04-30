@@ -803,6 +803,14 @@ body {
   width: 100%;
 }
 
+.w-\[240px\] {
+  width: 240px;
+}
+
+.w-auto {
+  width: auto;
+}
+
 .min-w-\[12rem\] {
   min-width: 12rem;
 }
@@ -995,6 +1003,12 @@ body {
   --tw-space-y-reverse: 0;
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .overflow-auto {
@@ -1315,6 +1329,10 @@ body {
 
 .pt-3 {
   padding-top: .75rem;
+}
+
+.pl-3 {
+  padding-left: .75rem;
 }
 
 .text-left {
