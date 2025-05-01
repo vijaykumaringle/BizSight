@@ -396,11 +396,8 @@ export default function OrdersPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {orders.map((order) => (
-              <TableRow key={order.id}>
-                <TableCell className="font-medium">{order.customer}</TableCell>
-                 <TableCell>{order.date ? order.date.toLocaleDateString() : 'N/A'}</TableCell> {/* Display Date */} 
-                <TableCell>
+            {orders.map((order) => (<TableRow key={order.id}>
+                <TableCell className="font-medium">{order.customer}</TableCell><TableCell>{order.date ? order.date.toLocaleDateString() : 'N/A'}</TableCell> {/* Display Date */}<TableCell>
                     {order.items.map(item => {
                         const inventoryItem = inventory.find(inv => inv.id === item.skuId);
                         const itemName = inventoryItem ? inventoryItem.name : "Unknown SKU"; // Handle unknown SKU
@@ -427,8 +424,7 @@ export default function OrdersPage() {
                     <Trash className="h-4 w-4" />
                   </Button>
                 </TableCell>
-              </TableRow>
-            ))}
+              </TableRow>))}
           </TableBody>
         </Table>
         {orders.length === 0 && ( // Added message for empty table
