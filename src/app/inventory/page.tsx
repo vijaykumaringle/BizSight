@@ -111,71 +111,73 @@ export default function InventoryPage() {
             <Sidebar>
               <SidebarHeader>
                 <MainNav pathname={pathname} />
-              </SidebarHeader>
-        <div className="p-4">
-          <div className="flex justify-between items-center mb-4">
-            <h1 className="text-2xl font-bold">Inventory</h1>          
-            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-              <DialogTrigger asChild>
-                <Button className="w-32">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Add Item
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>
-                    {editingItem ? "Edit Item" : "Add New Item"}
-                  </DialogTitle>
-                  <DialogDescription>
-                    {editingItem
-                      ? "Modify the item's name and quantity."
-                      : "Enter the name and quantity of the new item."}
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="name" className="text-right">
-                      Name
-                    </Label>
-                    <Input
-                      id="name"
-                      value={newItemName}
-                      onChange={(e) => setNewItemName(e.target.value)}
-                      className="col-span-3"
-                      placeholder="Item name"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="quantity" className="text-right">
-                      Quantity
-                    </Label>
-                    <Input
-                      id="quantity"
-                      type="number"
-                      value={newItemQuantity}
-                      onChange={(e) =>
-                        setNewItemQuantity(parseInt(e.target.value))
-                      }
-                      className="col-span-3"
-                      placeholder="Item quantity"
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-end">
-                  <Button
-                    onClick={
-                      editingItem ? handleSaveEditedItem : handleAddItem
-                    }
-                    disabled={!isFormValid}
-                  >
-                    {editingItem ? "Save" : "Add"}
-                  </Button>
-                </div>
-                
-              </DialogContent>
-            </Dialog>
-          </div>
+              </SidebarHeader>  
+            <SidebarFooter />
+            </Sidebar>
+            <div className="p-4">
+              <div className="flex justify-between items-center mb-4">
+                <h1 className="text-2xl font-bold">Inventory</h1>          
+                <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="w-32">
+                      <Plus className="mr-2 h-4 w-4" />
+                      Add Item
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>
+                        {editingItem ? "Edit Item" : "Add New Item"}
+                      </DialogTitle>
+                      <DialogDescription>
+                        {editingItem
+                          ? "Modify the item's name and quantity."
+                          : "Enter the name and quantity of the new item."}
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                          Name
+                        </Label>
+                        <Input
+                          id="name"
+                          value={newItemName}
+                          onChange={(e) => setNewItemName(e.target.value)}
+                          className="col-span-3"
+                          placeholder="Item name"
+                        />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="quantity" className="text-right">
+                          Quantity
+                        </Label>
+                        <Input
+                          id="quantity"
+                          type="number"
+                          value={newItemQuantity}
+                          onChange={(e) =>
+                            setNewItemQuantity(parseInt(e.target.value))
+                          }
+                          className="col-span-3"
+                          placeholder="Item quantity"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-end">
+                      <Button
+                        onClick={
+                          editingItem ? handleSaveEditedItem : handleAddItem
+                        }
+                        disabled={!isFormValid}
+                      >
+                        {editingItem ? "Save" : "Add"}
+                      </Button>
+                    </div>
+                    
+                  </DialogContent>
+                </Dialog>
+              </div>
           <Table>
             <TableHeader>
               <TableRow>
@@ -209,9 +211,8 @@ export default function InventoryPage() {
             </TableBody>
           </Table>
         </div>
-            <SidebarFooter />
-          </Sidebar>
         </SidebarProvider>
     );
   }
+
 
