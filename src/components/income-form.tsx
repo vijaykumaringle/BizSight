@@ -1,14 +1,19 @@
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
+import { useToast } from "@/hooks/use-toast";
 import { IncomeTransaction } from "@/lib/data";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,6 +36,9 @@ const formSchema = z.object({
   category: z.string().min(1, {
     message: "Category must be at least 1 character.",
   }),
+    currency: z.string({
+        required_error: "Currency is required.",
+    }),
 });
 
 interface IncomeFormProps {
@@ -39,6 +47,7 @@ interface IncomeFormProps {
 
 export function IncomeForm({ onIncomeAdded }: IncomeFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
   const today = new Date().toISOString().split('T')[0];
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -47,8 +56,8 @@ export function IncomeForm({ onIncomeAdded }: IncomeFormProps) {
         date: today,
         amount: 0,
         description: "",
-      category: "",
-
+        category: "",
+        currency: "USD",
 
     },
   })
@@ -68,10 +77,16 @@ export function IncomeForm({ onIncomeAdded }: IncomeFormProps) {
       if (response.ok) {
         form.reset();
         onIncomeAdded();
+        toast({
+          description: "Income added",
+        })
       } else {
-        console.error("Failed to add income transaction");
+        toast({
+          variant: "destructive",
+          description: "Failed to add income transaction",
+        })
       }
-    } catch (error) {
+      } catch (error) {
       console.error("Error adding income transaction:", error);
     } finally {
       setIsSubmitting(false);
@@ -110,7 +125,7 @@ export function IncomeForm({ onIncomeAdded }: IncomeFormProps) {
                   type="number" 
                   placeholder="Amount" 
                   value={field.value}
-
+                  
                   onChange={field.onChange}
                 />
               </FormControl>
@@ -148,6 +163,33 @@ export function IncomeForm({ onIncomeAdded }: IncomeFormProps) {
                   onChange={field.onChange}
                 />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+           <FormField
+          control={form.control}
+          name="currency"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Currency</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a currency" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                   <SelectItem value="USD">USD</SelectItem>
+                  <SelectItem value="EUR">EUR</SelectItem>
+                  <SelectItem value="JPY">JPY</SelectItem>
+                  <SelectItem value="GBP">GBP</SelectItem>
+                  <SelectItem value="AUD">AUD</SelectItem>
+                  <SelectItem value="CAD">CAD</SelectItem>
+                  <SelectItem value="CHF">CHF</SelectItem>
+                  <SelectItem value="CNY">CNY</SelectItem>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

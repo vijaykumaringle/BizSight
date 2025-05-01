@@ -35,6 +35,9 @@ interface InventoryItem {
   id: string;
   name: string;
   quantity: number;
+  cost: number;
+  price: number;
+  sku: string;
 }
 
 
@@ -43,6 +46,10 @@ export default function InventoryPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newItemName, setNewItemName] = useState("");
   const [newItemQuantity, setNewItemQuantity] = useState(0);
+  const [newItemCost, setNewItemCost] = useState(0);
+  const [newItemPrice, setNewItemPrice] = useState(0);
+  const [newItemSKU, setNewItemSKU] = useState("");
+  const [currency, setCurrency] = useState<string>("USD");
   const [editingItem, setEditingItem] = useState<InventoryItem | null>(null);
 
   useEffect(() => {
@@ -61,10 +68,14 @@ export default function InventoryPage() {
       id: Date.now().toString(),
       name: newItemName,
       quantity: newItemQuantity,
+        cost: newItemCost,
+        price: newItemPrice,
+        sku: newItemSKU,
     };
     setItems([...items, newItem]);
     setNewItemName("");
     setNewItemQuantity(0);
+    setNewItemSKU("");
     setIsModalOpen(false);
   };
 
@@ -72,6 +83,9 @@ export default function InventoryPage() {
     setEditingItem(item);
     setNewItemName(item.name);
     setNewItemQuantity(item.quantity);
+    setNewItemCost(item.cost);
+    setNewItemPrice(item.price);
+      setNewItemSKU(item.sku);
     setIsModalOpen(true);
   };
 
@@ -80,12 +94,13 @@ export default function InventoryPage() {
       setItems(
         items.map((item) =>
           item.id === editingItem.id
-            ? { ...item, name: newItemName, quantity: newItemQuantity }
+            ? { ...item, name: newItemName, quantity: newItemQuantity, cost: newItemCost, price: newItemPrice, sku: newItemSKU }
             : item
         )
       );
       setEditingItem(null);
       setNewItemName("");
+      setNewItemSKU("");
       setNewItemQuantity(0);
       setIsModalOpen(false);
     }
@@ -100,11 +115,15 @@ export default function InventoryPage() {
     setEditingItem(null);
     setNewItemName("");
     setNewItemQuantity(0);
+    setNewItemCost(0);
+      setNewItemSKU("");
+    setNewItemPrice(0);
+      setCurrency("USD")
   };
 
   const pathname = usePathname();
 
-  const isFormValid = newItemName.trim() !== "" && newItemQuantity >= 0;
+  const isFormValid = newItemName.trim() !== "" && newItemQuantity >= 0 && newItemCost >= 0 && newItemPrice >=0;
 
     return (
         <SidebarProvider>
@@ -149,6 +168,19 @@ export default function InventoryPage() {
                         />
                       </div>
                       <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="sku" className="text-right">
+                              SKU
+                          </Label>
+                          <Input
+                              id="sku"
+                              value={newItemSKU}
+                              onChange={(e) => setNewItemSKU(e.target.value)}
+                              className="col-span-3"
+                              placeholder="Item SKU"
+                          />
+                      </div>
+
+                      <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="quantity" className="text-right">
                           Quantity
                         </Label>
@@ -162,6 +194,32 @@ export default function InventoryPage() {
                           className="col-span-3"
                           placeholder="Item quantity"
                         />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="cost" className="text-right">
+                          Cost
+                        </Label>
+                        <Input
+                          id="cost"
+                          type="number"
+                          value={newItemCost}
+                          onChange={(e) =>
+                            setNewItemCost(parseInt(e.target.value))
+                          }                            
+                          className="col-span-3"
+                          placeholder="Item cost"
+                        />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="price" className="text-right">
+                          Price
+                        </Label>
+                        <Input
+                          id="price"
+                          type="number"
+                          value={newItemPrice}
+                          onChange={(e) => setNewItemPrice(parseInt(e.target.value))}
+                          className="col-span-3" placeholder="Item Price"/>
                       </div>
                     </div>
                     <div className="flex justify-end">
@@ -178,18 +236,30 @@ export default function InventoryPage() {
                   </DialogContent>
                 </Dialog>
               </div>
+              
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
                 <TableHead>Quantity</TableHead>
+                <TableHead>SKU</TableHead>
+                <TableHead>Cost</TableHead>
+                <TableHead>Price</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {items.map((item) => (
+
                 <TableRow key={item.id}>
                   <TableCell className="font-medium">{item.name}</TableCell>
                   <TableCell>{item.quantity.toString()}</TableCell>
+                    <TableCell>{item.sku}</TableCell>
+                  <TableCell>
+                                        {item.cost !== undefined ? `${currency}${item.cost.toString()}` : ""}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.price !== undefined ? `${currency}${item.price.toString()}` : ""}
+                                    </TableCell>
                   <TableCell className="flex justify-end">
                     <Button
                       variant="ghost"

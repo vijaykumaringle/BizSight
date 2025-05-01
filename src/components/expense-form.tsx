@@ -1,14 +1,19 @@
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
+import { useUserCurrency } from "@/hooks/use-user-currency";
 import { ExpenseTransaction } from "@/lib/data";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,6 +36,7 @@ const formSchema = z.object({
 
 interface ExpenseFormProps {
   onExpenseAdded: () => void;
+  
 }
 
 export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
@@ -46,6 +52,8 @@ export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
       category: "",
     },
   });
+  const { userCurrency } = useUserCurrency();
+
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
@@ -112,6 +120,27 @@ export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
             </FormItem>
           )}
         />
+         <FormField
+          control={form.control}
+          name="currency"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Currency</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={userCurrency}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a currency" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                <SelectItem value="USD">USD</SelectItem>
+                <SelectItem value="EUR">EUR</SelectItem>
+                <SelectItem value="MXN">MXN</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )} />
         <FormField
           control={form.control}
           name="description"
