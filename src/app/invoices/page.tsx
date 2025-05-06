@@ -3,6 +3,8 @@
 import React from 'react';
 import { SidebarProvider, Sidebar, SidebarContent, MainNav, SidebarFooter } from '@/components/sidebar';
 import { usePathname } from 'next/navigation';
+import InvoiceList from '@/components/invoice-list';
+import InvoiceForm from '@/components/invoice-form';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const InvoicesPage: React.FC = () => {
@@ -22,9 +24,8 @@ const InvoicesPage: React.FC = () => {
             <CardTitle>Invoices</CardTitle>
           </CardHeader>
           <CardContent>
-            <div>
-                Display Invoices Here
-            </div>
+            <InvoiceForm/>
+            <InvoiceList/>
           </CardContent>
         </Card>
       </div>
