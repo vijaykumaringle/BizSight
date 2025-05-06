@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Sidebar,
@@ -6,7 +6,8 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarProvider,
-} from "@/components/sidebar";
+} from '@/components/sidebar';
+import { useUserCurrency } from '@/hooks/use-user-currency';
 import { Button } from "@/components/ui/button";
 import { MainNav } from "@/components/sidebar";
 import {
@@ -17,8 +18,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 import { Label } from "@/components/ui/label";
+import {
+  Pagination,
+  PaginationContent,
+} from '@/components/ui/pagination';
 import {
   Table,
   TableBody,
@@ -26,14 +31,18 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { usePathname } from "next/navigation";
-import { Plus, Pencil, Trash } from "lucide-react";
-import { useState, useEffect } from "react";
+} from '@/components/ui/table';
+import { usePathname } from 'next/navigation';
+import { Plus, Pencil, Trash, ArrowUpDown } from 'lucide-react';
+import { useState, useEffect, useMemo } from "react";
+import { useSearchParams } from 'next/navigation';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface InventoryItem {
   id: string;
   name: string;
+  image: string;
+  imageUrl?: string;
   quantity: number;
   cost: number;
   price: number;
@@ -42,20 +51,86 @@ interface InventoryItem {
 
 
 export default function InventoryPage() {
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1;
+  const itemsPerPage = 10;
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState<keyof InventoryItem | null>(null);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [items, setItems] = useState<InventoryItem[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newItemName, setNewItemName] = useState("");
   const [newItemQuantity, setNewItemQuantity] = useState(0);
   const [newItemCost, setNewItemCost] = useState(0);
   const [newItemPrice, setNewItemPrice] = useState(0);
+  const [newItemImage, setNewItemImage] = useState('');
   const [newItemSKU, setNewItemSKU] = useState("");
-  const [currency, setCurrency] = useState<string>("USD");
   const [editingItem, setEditingItem] = useState<InventoryItem | null>(null);
+  const currency = useUserCurrency();
+
+  // Function to handle image upload
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setNewItemImage(reader.result as string);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const sortedItems = useMemo(() => {
+    let sorted = [...items];
+
+    if (searchTerm) {
+      sorted = sorted.filter((item) => {
+        const nameMatch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const skuMatch = item.sku.toLowerCase().includes(searchTerm.toLowerCase());
+        return nameMatch || skuMatch;
+      });
+    }
+
+    if (sortBy) {
+      sorted.sort((a, b) => {
+        const aValue = a[sortBy];
+        const bValue = b[sortBy];
+
+        if (typeof aValue === 'string' && typeof bValue === 'string') {
+          return sortOrder === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+        } else if (typeof aValue === 'number' && typeof bValue === 'number') {
+          return sortOrder === 'asc' ? aValue - bValue : bValue - aValue;
+        } else {
+          return 0;
+        }
+      });
+    }
+
+    return sorted;
+    }, [items, searchTerm, sortBy, sortOrder]);
+
+
+  const totalValue = useMemo(() => {
+    return items.reduce((sum, item) => sum + item.quantity * item.price, 0);
+  }, [items]);
+
+  const itemsToDisplay = useMemo(() => {
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    return sortedItems.slice(start, end);
+  }, [page, sortedItems, itemsPerPage]);
 
   useEffect(() => {
-    const storedItems = localStorage.getItem("inventoryItems");
+    const storedItems = localStorage.getItem('inventoryItems');
     if (storedItems) {
-      setItems(JSON.parse(storedItems));
+      const parsedItems = JSON.parse(storedItems) as InventoryItem[];
+      const itemsWithImageUrls = parsedItems.map((item) => ({
+        ...item, imageUrl: item.image ? item.image : undefined, // Add imageUrl property
+      }));
+
+      setItems(itemsWithImageUrls);
     }
   }, []);
 
@@ -67,10 +142,12 @@ export default function InventoryPage() {
     const newItem: InventoryItem = {
       id: Date.now().toString(),
       name: newItemName,
+      image: newItemImage,
       quantity: newItemQuantity,
-        cost: newItemCost,
-        price: newItemPrice,
-        sku: newItemSKU,
+      cost: newItemCost,
+      price: newItemPrice,
+      sku: newItemSKU,
+      imageUrl: newItemImage,
     };
     setItems([...items, newItem]);
     setNewItemName("");
@@ -84,6 +161,7 @@ export default function InventoryPage() {
     setNewItemName(item.name);
     setNewItemQuantity(item.quantity);
     setNewItemCost(item.cost);
+    setNewItemImage(item.image);
     setNewItemPrice(item.price);
       setNewItemSKU(item.sku);
     setIsModalOpen(true);
@@ -94,8 +172,8 @@ export default function InventoryPage() {
       setItems(
         items.map((item) =>
           item.id === editingItem.id
-            ? { ...item, name: newItemName, quantity: newItemQuantity, cost: newItemCost, price: newItemPrice, sku: newItemSKU }
-            : item
+            ? { ...item, name: newItemName, quantity: newItemQuantity, cost: newItemCost, price: newItemPrice, sku: newItemSKU, image: newItemImage, imageUrl: newItemImage } : item
+
         )
       );
       setEditingItem(null);
@@ -116,29 +194,36 @@ export default function InventoryPage() {
     setNewItemName("");
     setNewItemQuantity(0);
     setNewItemCost(0);
-      setNewItemSKU("");
+    setNewItemSKU("");
+    setNewItemImage('');
     setNewItemPrice(0);
-      setCurrency("USD")
   };
 
   const pathname = usePathname();
+  const isFormValid = newItemName.trim() !== '' && newItemQuantity >= 0 && newItemCost >= 0 && newItemPrice >= 0 && newItemSKU.trim() !== '';
 
-  const isFormValid = newItemName.trim() !== "" && newItemQuantity >= 0 && newItemCost >= 0 && newItemPrice >=0;
-
-    return (
-        <SidebarProvider>
-            <Sidebar>
-              <SidebarHeader>
-                <MainNav pathname={pathname} />
-              </SidebarHeader>  
-            <SidebarFooter />
-            </Sidebar>
-            <div className="p-4">
+  return (
+    <SidebarProvider>
+      <Sidebar>
+        <SidebarHeader>
+          <MainNav pathname={pathname} />
+        </SidebarHeader>
+        <SidebarFooter />
+      </Sidebar>
+      <div className="p-4 flex-1 overflow-auto">
               <div className="flex justify-between items-center mb-4">
-                <h1 className="text-2xl font-bold">Inventory</h1>          
+                <h1 className="text-2xl font-bold">Inventory</h1>
                 <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                   <DialogTrigger asChild>
-                    <Button className="w-32">
+                    <Button
+                      onClick={() => {
+                        setEditingItem(null);
+                        setNewItemName('');
+                        setNewItemQuantity(0);
+                        setNewItemCost(0);
+                        setNewItemPrice(0);
+                      }}
+                    >
                       <Plus className="mr-2 h-4 w-4" />
                       Add Item
                     </Button>
@@ -153,8 +238,30 @@ export default function InventoryPage() {
                           ? "Modify the item's name and quantity."
                           : "Enter the name and quantity of the new item."}
                       </DialogDescription>
-                    </DialogHeader>
+                     </DialogHeader>
                     <div className="grid gap-4 py-4">
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="image" className="text-right">
+                          Image
+                        </Label>
+                        <div className="col-span-3">
+                          <input
+                            type="file"
+                            id="image"
+                            accept="image/*"
+                            onChange={handleImageUpload}
+                          />
+                          {newItemImage && (
+                            <img
+                              src={newItemImage}
+                              alt="Uploaded"
+                              className="mt-2 w-20 h-20 object-cover rounded-md"
+                            />
+                          )}
+                        </div>
+                      </div>
+
+
                       <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="name" className="text-right">
                           Name
@@ -237,33 +344,81 @@ export default function InventoryPage() {
                 </Dialog>
               </div>
               
+              <div className="mb-4">
+                <Input
+                  type="text"
+                  placeholder="Search by name or SKU..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full"
+                />
+              </div>
+
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Quantity</TableHead>
-                <TableHead>SKU</TableHead>
-                <TableHead>Cost</TableHead>
-                <TableHead>Price</TableHead>
+                <TableHead className="cursor-pointer" onClick={() => { setSortBy('name'); setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc') }}>
+                  Name
+                  <ArrowUpDown className="ml-2 inline h-4 w-4" />
+                </TableHead>
+                <TableHead className="cursor-pointer" onClick={() => { setSortBy('quantity'); setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc') }}>
+                  Quantity
+                  <ArrowUpDown className="ml-2 inline h-4 w-4" />
+                </TableHead>
+                <TableHead className="cursor-pointer" onClick={() => { setSortBy('sku'); setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc') }}>
+                  SKU
+                  <ArrowUpDown className="ml-2 inline h-4 w-4" />
+                </TableHead>
+                <TableHead className="cursor-pointer" onClick={() => { setSortBy('cost'); setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc') }}>
+                  Cost
+                  <ArrowUpDown className="ml-2 inline h-4 w-4" />
+                </TableHead>
+                <TableHead className="cursor-pointer" onClick={() => { setSortBy('price'); setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc') }}>
+                  Price
+                  <ArrowUpDown className="ml-2 inline h-4 w-4" />
+                </TableHead>
+                <TableHead>
+                  Actions
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {items.map((item) => (
+              {itemsToDisplay.map((item) => (
 
                 <TableRow key={item.id}>
-                  <TableCell className="font-medium">{item.name}</TableCell>
-                  <TableCell>{item.quantity.toString()}</TableCell>
-                    <TableCell>{item.sku}</TableCell>
+                  <TableCell className="font-medium flex items-center">
+                    {item.imageUrl && (
+                      <img
+                        src={item.imageUrl}
+                        alt={item.name}
+                        className="mr-2 h-8 w-8 rounded-full object-cover"
+                      />
+                    )}
+                    {item.name}
+                  </TableCell>
                   <TableCell>
-                                        {item.cost !== undefined ? `${currency}${item.cost.toString()}` : ""}
-                                    </TableCell>
-                                    <TableCell>
-                                        {item.price !== undefined ? `${currency}${item.price.toString()}` : ""}
-                                    </TableCell>
+                  {item.quantity.toString()}
+                  </TableCell>
+                  <TableCell>{item.sku}</TableCell>
+                  <TableCell>
+                    {item.cost !== undefined ? `${currency}${item.cost.toString()}` : ""}
+                  </TableCell>
+                  <TableCell>
+                    {item.price !== undefined ? `${currency}${item.price.toString()}` : ""}
+                  </TableCell>
                   <TableCell className="flex justify-end">
                     <Button
                       variant="ghost"
-                      onClick={() => handleEditItem(item)}
+                      onClick={() => {
+                        setEditingItem(item);
+                        setNewItemName(item.name);
+                        setNewItemQuantity(item.quantity);
+                        setNewItemCost(item.cost);
+                        setNewItemPrice(item.price);
+                        setNewItemImage(item.image);
+                        setNewItemSKU(item.sku);
+                        setIsModalOpen(true);
+                      }}
                       size="icon"
                     >
                       <Pencil className="h-4 w-4" />
@@ -279,7 +434,26 @@ export default function InventoryPage() {
                 </TableRow>
               ))}
             </TableBody>
+            <tfoot>
+              <TableRow>
+                <TableCell colSpan={4} className="text-right font-bold">
+                  Total Inventory Value:
+                </TableCell>
+                <TableCell className="font-bold">
+                  {currency}
+                  {totalValue.toFixed(2)}
+                </TableCell>
+                <TableCell />
+              </TableRow>
+            </tfoot>
           </Table>
+          <Pagination>
+            <PaginationContent
+              onPageChange={(newPage) => {}}
+              page={page}
+              pageCount={Math.ceil(sortedItems.length / itemsPerPage)}
+            />
+          </Pagination>
         </div>
         </SidebarProvider>
     );
