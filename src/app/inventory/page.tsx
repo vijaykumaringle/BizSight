@@ -268,10 +268,12 @@ export default function InventoryPage() {
     }
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setEditingItem(null);
-    resetFormFields();
+  const handleOpenChange = (open: boolean) => {
+    setIsModalOpen(open);
+    if (!open) { // If the dialog is closing
+      setEditingItem(null);
+      resetFormFields();
+    }
   };
 
   const totalValue = useMemo(() => {
@@ -299,7 +301,7 @@ export default function InventoryPage() {
       <div className="flex-1 p-4 overflow-auto">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Inventory</h1>
-          <Dialog open={isModalOpen} onOpenChange={handleModalClose}>
+          <Dialog open={isModalOpen} onOpenChange={handleOpenChange}>
             <DialogTrigger asChild>
               <Button className="w-auto">
                 <Plus className="mr-2 h-4 w-4" /> Add Item
@@ -416,7 +418,7 @@ export default function InventoryPage() {
                   </div>
                 </div>
                 <DialogFooter className="pt-6">
-                  <Button variant="outline" onClick={handleModalClose}>Cancel</Button>
+                  <Button variant="outline" onClick={() => handleOpenChange(false)}>Cancel</Button>
                   <Button
                     onClick={editingItem ? handleSaveEditedItem : handleAddItem}
                     disabled={!isFormValid}
