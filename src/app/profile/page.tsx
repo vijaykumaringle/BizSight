@@ -9,11 +9,27 @@ import {
   SidebarFooter,
 } from '@/components/sidebar';
 import { usePathname } from 'next/navigation';
+import { useToast } from '@/hooks/use-toast';
 
 const ProfilePage: React.FC = () => {
   const pathname = usePathname();
+  const { toast } = useToast();
+
+  const handleUpdateDetails = async () => {
+    // Simulate an update process that can randomly succeed or fail
+    const isSuccess = Math.random() > 0.5;
+    
+    toast({
+      title: isSuccess ? "Profile Updated" : "Update Failed",
+      description: isSuccess ? "Your profile details have been updated successfully." : "There was an error updating your profile details.",
+      variant: isSuccess ? "default" : "destructive",
+    });
+    
+    if (!isSuccess) {
+    }
+  };
   return (
-    <SidebarProvider>
+     <SidebarProvider>
       <Sidebar collapsible="icon">
         <SidebarContent>
           {/* Pass the pathname to MainNav */}
@@ -55,10 +71,37 @@ const ProfilePage: React.FC = () => {
                 defaultValue="john.doe@example.com"
               />
             </div>
+            <div className="mb-6">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="phoneNumber"
+              >
+                Phone Number
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="phoneNumber"
+                type="tel"
+                placeholder="Your Phone Number"
+                defaultValue="+1-555-123-4567"
+              />
+            </div>
+            <div className="mb-6">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="address"
+              >
+                Address
+              </label>
+              <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text" placeholder="Your Address" defaultValue="123 Main St, Anytown, USA" />
+            </div>
+
+
             <div className="flex items-center justify-between">
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="button"
+                onClick={handleUpdateDetails}
               >
                 Update Details
               </button>
