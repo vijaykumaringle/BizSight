@@ -10,6 +10,7 @@ import {SidebarProvider, Sidebar, SidebarContent, MainNav} from '@/components/si
 
 export default function Home() {
   const pathname = usePathname(); // Get the current pathname
+  const userName = "John Doe"; // Placeholder user name
 
   return (
     <SidebarProvider>
@@ -21,7 +22,7 @@ export default function Home() {
       </Sidebar>
       <div className="flex-1 p-4">
         <div className="flex flex-col h-full">
-          <DashboardHeader />
+          <DashboardHeader userName={userName} />
           <div className="grid gap-4 py-4">
             <DashboardMetrics />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
